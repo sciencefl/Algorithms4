@@ -121,6 +121,7 @@ public class PSO {
                     gBest.setF(p[j].getF());
                 }
             }
-            System.out.println("======"+(i+1)+"======gbest:"+gBest.toString());}
+            System.out.println("======"+(i+1)+"======gbest:"+gBest.toString());
+            }
         }
 }
