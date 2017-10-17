@@ -6,7 +6,7 @@ public class Question5 {
 		// TODO Auto-generated method stub
 			PSO ts = new PSO();
 			ts.init();
-			ts.PSO_Method(10000);
+			ts.PSO_Method(10000);		
 	}
 
 }

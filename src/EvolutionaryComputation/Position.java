@@ -29,6 +29,7 @@ package EvolutionaryComputation;
 			this.f=f_s;
 		}
 		public String toString(){
-			return "适应函数值 f:"+f;
+			//return "适应函数值 f:"+this.f+"  x:"+pos[0]+" "+pos[1]+" "+pos[2]+" "+pos[3]+" "+pos[4];
+			return " f:"+this.f;
 		}
 	}

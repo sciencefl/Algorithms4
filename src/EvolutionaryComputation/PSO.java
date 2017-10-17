@@ -11,17 +11,17 @@ package EvolutionaryComputation;
  **/
 public class PSO {
 	
-	int n=100; //粒子个数，太多或者太少都会有问题
+	int n=1; //粒子个数，太多或者太少都会有问题
 	Position[] p; //鸟的位置和适应值存储类
 	Position[] v; //鸟的位置变化量
 	Position[] pBest;  //记录每只鸟的历史最佳位置
 	Position   gBest;  //记录种群的最佳位置
 	int dim=5; //维度参数，设置变量的个数
 	// 设置两个加速函数
-	double c1=1.5;
-	double c2=1.5;
+	double c1=15;
+	double c2=5;
 	double w=0.3;
-	double vmax=0.05;  //最快增长的速度
+	double vmax=0.5;  //最快增长的速度
 	/**
 	 * @exception 适应函数，通过鸟的位置计算鸟的适应值
 	 */
@@ -30,21 +30,24 @@ public class PSO {
 		double z=0;
 		double e=0;
 		double fitness;
-		double condition_sum=0;
-		double condition_mul=1.0;
 		
 		for(int i=0;i<n;i++){
+			double condition_sum=0;
+			double condition_mul=1.0;
 			for(int j=0;j<dim;j++){
 				y*=Math.cos(p[i].getPosD(j))*Math.cos(p[i].getPosD(j));
-				z+=Math.pow(Math.cos(p[i].getPosD(j)),4.0);
-				e+=Math.pow(p[i].getPosD(j),2);
+				z+=Math.pow(Math.cos(p[i].getPosD(j)),4);
+				e+=Math.pow(p[i].getPosD(j),2)*(j+1);
 				condition_sum+=p[i].getPosD(j);
 				condition_mul*=p[i].getPosD(j);
 			}
-			e=Math.pow(e, 0.5);
+			e=Math.pow(e,0.5);
 			//如果符合约束条件就更新适应值，否则不做任何改变
+			//System.out.println("z:"+z+" e:"+e+" y:"+y+" c_sum:"+condition_sum+" c_mul:"+condition_mul);
 			if(condition_sum<=7.5*dim&&condition_mul>=0.75){
-				p[i].setF(-Math.abs((z-y)/e));
+				fitness=-Math.abs((z-y)/e);
+				p[i].setF(fitness);
+				//System.out.println("result:"+fitness+" f:"+p[i].getF());
 			}
 		}
 	}
@@ -64,7 +67,6 @@ public class PSO {
 		}
 		//初始化粒子群最优位置
 		gBest=new Position(pos_p,dim);
-		
 		for(int i=0;i<n;i++){
 			for(int j=0;j<dim;j++){
 				pos_p[j]=Math.random()*10;
@@ -75,7 +77,7 @@ public class PSO {
 		}
 		fitnessFunciton();
 		gBest.setF(Double.MAX_VALUE);
-		for(int i=0;i<100;i++){
+		for(int i=0;i<n;i++){
 			pBest[i]=p[i];
 			//求最小值，所以最小的值是最优的
 			if(p[i].getF()<gBest.getF()){  
@@ -91,9 +93,13 @@ public class PSO {
         for(int i=0;i<max;i++){
             for(int j=0;j<n;j++){
             	for(int k=0;k<dim;k++){
-            		v_s[k]=w*v[j].getPosD(k)+c1*Math.random()*(pBest[j].getPosD(k)-p[j].getPosD(k))+c2*Math.random()*(gBest.getPosD(k)-p[j].getPosD(k));
+            		v_s[k]=w*v[j].getPosD(k)+c1*Math.random()*(pBest[j].getPosD(k)-p[j].getPosD(k))
+            				+c2*Math.random()*(gBest.getPosD(k)-p[j].getPosD(k));
+            		//System.out.println("v_s"+k+":"+v_s[k]);
             		if(v_s[k]>vmax){
             			v_s[k]=vmax;
+            		}else if(v_s[k]<-vmax){
+            			v_s[k]=-vmax;
             		}
             	}
                 //更新位置和速度
@@ -102,9 +108,9 @@ public class PSO {
                 	//判断越界
                 	double sum_tmp=p[j].getPosD(m)+v[j].getPosD(m);
                 	if(sum_tmp>10){
-                		sum_tmp=10;
+                		sum_tmp=9.999;
                 	}else if(sum_tmp<0){
-                		sum_tmp=0;
+                		sum_tmp=0.001;
                 	}
                 		
                 	p[j].setPos(sum_tmp, m);
