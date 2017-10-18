@@ -9,18 +9,21 @@ package EvolutionaryComputation;
  *4.计算位置变化量，改变位置
  *5.重复2~4，一个较大的次数使他趋于稳定
  **/
+/**
+ *@author flzhang 
+ */
 public class PSO {
 	
-	int n=1; //粒子个数，太多或者太少都会有问题
+	int n=100; //粒子个数，太多或者太少都会有问题
 	Position[] p; //鸟的位置和适应值存储类
 	Position[] v; //鸟的位置变化量
 	Position[] pBest;  //记录每只鸟的历史最佳位置
 	Position   gBest;  //记录种群的最佳位置
-	int dim=5; //维度参数，设置变量的个数
+	int dim=10; //维度参数，设置变量的个数
 	// 设置两个加速函数
-	double c1=15;
-	double c2=5;
-	double w=0.3;
+	double c1=5;  //加速常数1
+	double c2=5;  	//加速常数2
+	double w=0.3;	//惯性常数
 	double vmax=0.5;  //最快增长的速度
 	/**
 	 * @exception 适应函数，通过鸟的位置计算鸟的适应值
@@ -41,7 +44,7 @@ public class PSO {
 				condition_sum+=p[i].getPosD(j);
 				condition_mul*=p[i].getPosD(j);
 			}
-			e=Math.pow(e,0.5);
+			e=Math.pow(e,0.5)/6;
 			//如果符合约束条件就更新适应值，否则不做任何改变
 			//System.out.println("z:"+z+" e:"+e+" y:"+y+" c_sum:"+condition_sum+" c_mul:"+condition_mul);
 			if(condition_sum<=7.5*dim&&condition_mul>=0.75){
@@ -53,7 +56,6 @@ public class PSO {
 	}
 	/**
 	 * 种群初始化
-	 * @param args
 	 */
 	public void init(){
 		p=new Position[n];
