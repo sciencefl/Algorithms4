@@ -16,14 +16,25 @@ public class Solution {
 
 
     }
-	Node RemoveDuplicates(Node head) {
-		  // This is a "method-only" submission. 
-		  // You only need to complete this method. 
-		int k;//用来存储第一个值
-		Node first=head;
-		while(head != null){
-			
-		}
-		return first ;
-		}
+    int FindMergeNode(Node headA, Node headB) {
+        // Complete this function
+        // Do not write the main method. 
+    	while(headA!=null){
+    		while(headB!=null){
+    			if(headB==headA){
+    				return headB.data;
+    			}
+    			headB=headB.next;
+    		}
+    		headA=headA.next;
+    	}
+    	 return headA.data;
+    }
 }
+		
+		
+
+		
+
+
+		
