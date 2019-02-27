@@ -11,12 +11,33 @@ import edu.princeton.cs.algs4.SET;
 
 public class Solution {
 	public int climbStairs(int n) {
+		int[] temp= {0,1};
 		if(n==1) {
 			return 1;
-		}else if(n==2) {
-			return 2;
 		}
-		return climbStairs(n-1)+climbStairs(n-2);     
+		int res=0;
+		int res0=0,res1=1;
+			for(int i=1;i<n;i++) {
+				res=res0+res1;
+				res0=res1;
+				res1=res;
+			}
+		return res;
+    }
+    public int fib(int N) {
+        if(N==0){
+            return 0;
+        }
+        if(N==1){
+            return 1;
+        }
+        int fibN=0,fib0=0,fib1=1;
+        for(int i=2;i<=N;i++) {
+        	fibN=fib0+fib1;
+        	fib0=fib1;
+        	fib1=fibN;
+        }
+        return fibN;   
     }
 
     public boolean isValid(String s) {
