@@ -1,13 +1,13 @@
 package leetcode;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
-
-import edu.princeton.cs.algs4.Merge;
-
+import java.util.Date;
 public class Sort {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Sort  sort=new Sort();
 		int[] array= {6,5,4,3,7,7,2,1,9,100};
 		int[] array2= {1,2,3,4,5,6,7,8};
@@ -15,8 +15,10 @@ public class Sort {
 //		sort.bubbleSort(array2, array2.length);
 //		sort.insertionSort(array,array.length); 
 //		sort.selectionSort(array,array.length);
-		sort.mergeSort(array, array.length);
-//		sort.merge(array2, 0, 3, 7);
+//		sort.mergeSort(array, array.length);
+		System.out.println(df.format(new Date()));
+		sort.quickSort(array, array.length);
+		System.out.println(df.format(new Date()));
 		for(int i=0;i<array.length;i++)
 		System.out.println(array[i]);
 		System.out.println(Arrays.toString(array));
@@ -130,5 +132,37 @@ public class Sort {
 			k++;
 		}
 	}
-
+	// 快速排序，也是利用了分治的思想，递推公式quickSort(p,r)=quickSort(p,q-1)+quickSort(q+1,r);
+	//终止条件 p>=r
+	public void quickSort(int[] a ,int n) {
+		quickSort_c(a,0, n-1);
+	}
+	//递归的实现
+	public void quickSort_c(int[] a,int low,int high ) {
+		if(low<high) {
+			//获取分区点
+			int privot=partition(a, low, high);
+			quickSort_c(a, low, privot-1);
+			quickSort_c(a, privot+1, high);
+		}
+	}
+	//分区函数，分区的数值下标 
+	//随机选一个元素作为区分点，一般选择数组的最后一个元素
+	public  int  partition(int[] a,int low,int high) {
+		int privot=a[high]; //获取分区点，循环比较元素，小于的交换，不小于的放着
+		int cursor=low;  // 获取位置的游标 
+		int temp=0;
+		for(int i=low;i<high;i++) {
+			if(a[i]<privot) {
+				temp=a[cursor];
+				a[cursor]=a[i];
+				a[i]=temp;
+				cursor++;
+			}
+		}
+		a[high]=a[cursor];
+		a[cursor]=privot;
+		System.out.println(Arrays.toString(a));
+		return cursor;
+	}
 }
