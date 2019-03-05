@@ -13,6 +13,9 @@ public class BinarySearch {
 		// TODO Auto-generated method stub
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		BinarySearch  binarySerach=new BinarySearch();
+		int t=256;
+		t = 0x5f3759df - (t >> 1);
+		System.out.println(t);
 		int[] array= {6,5,4,3,7,7,2,1,9,100};
 		int[] array2= {1,2,3,4,5,6,7,8};
 		int[] array3= {};
