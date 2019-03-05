@@ -153,7 +153,34 @@ public class Solution {
     }
     public static void main(String[] args) {
     	Solution solution =new Solution();
-    	System.out.println(solution.climbStairs(2));;
+    //	System.out.println(solution.climbStairs(2));
+    	System.out.println(solution.mySqrt(2147395600));
+    }
+    public int mySqrt1(int x) {
+        long t = x;
+	t = 0x5f3759df - (t >> 1);
+	while (!(t*t <= x && (t+1)*(t+1) > x))
+		t = (x/t + t)/2;
+	return (int)t;
+    }
+    public int mySqrt(int x) {
+    	long low=0;
+    	long high=0;
+    	if(x>=46340) {
+    		 high=46340;
+    	}else {
+    		 high=x;
+    	} 
+    	long mid=low+((high-low)>>1);
+    	while(!(mid*mid<=x&&(mid+1)*(mid+1)>x)) {
+    		if(mid*mid<x) {
+    			low=mid+1;
+    		}else {
+    			high=mid-1;
+    		}
+    		mid=low+((high-low)>>1);
+    	}
+    	return (int)mid;
     }
 
 
