@@ -16,7 +16,9 @@ public class BinarySearch {
 		int[] array= {6,5,4,3,7,7,2,1,9,100};
 		int[] array2= {1,2,3,4,5,6,7,8};
 		int[] array3= {};
-		int result=binarySerach.simpleBinarySearch(array2,array2.length,8);
+		int result=-1;
+//		result=binarySerach.simpleBinarySearch(array2,array2.length,8);
+		result=binarySerach.simpleBinarySearchRecursion(array2,array2.length,10);
 		System.out.println(result);
 //		sort.bubbleSort(array2, array2.length);
 //		sort.insertionSort(array,array.length); 
@@ -36,6 +38,9 @@ public class BinarySearch {
 	 * 1.循环退出条件是low<=high
 	 * 2.mid的取值 为  mid =low+(high-low)>>1;
 	 * 3.low和high的更新
+	 * 细节注意：
+	 *将mid = lo + (hi - lo) /2，将除法优化成移位运算时，
+	 *得注意运算符的优先级，千万不能写成这样：mid = lo + (hi - lo) >> 1
 	 */
 	public int simpleBinarySearch(int[] a,int n,int value){
 		int low=0;
@@ -51,6 +56,23 @@ public class BinarySearch {
 			}
 		}
 		return -1;
+	}
+	//二分查找的递归方法
+	public int simpleBinarySearchRecursion(int[] a,int n,int value) {
+		return simpleBinarySearchRecursion_c(a, 0, n-1, value);
+	}
+	public int simpleBinarySearchRecursion_c(int[] a,int low ,int high,int value) {
+		if(low>high) {
+			return -1;
+		}
+		int mid=low+((high-low)>>1);
+		if(a[mid]==value) {
+			return mid;
+		}else if(a[mid]>value) {
+			return simpleBinarySearchRecursion_c(a, low, mid-1, value);
+		}else {
+			return simpleBinarySearchRecursion_c(a, mid+1, high, value);
+		}
 	}
 
 }
