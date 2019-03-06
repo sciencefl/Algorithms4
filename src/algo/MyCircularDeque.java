@@ -1,4 +1,4 @@
-package leetcode;
+package algo;
 
 public class MyCircularDeque {
     /** Initialize your data structure here. Set the size of the deque to be k. */

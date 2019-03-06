@@ -1,4 +1,4 @@
-package leetcode;
+package algo;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -36,7 +36,7 @@ public class BinarySearch {
 
 	}
 	//简单二分查找，假设数据有序，且无重复数据,非递归写法
-	/*
+	/*  时间复杂度是 logn
 	 * 注意三点：
 	 * 1.循环退出条件是low<=high
 	 * 2.mid的取值 为  mid =low+(high-low)>>1;
