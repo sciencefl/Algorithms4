@@ -3,6 +3,7 @@ package algo;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 
 public class BinarySearch {
 
@@ -11,6 +12,10 @@ public class BinarySearch {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Object object=new Object();
+		String s="dafd";
+		int[] a=new int[100];
+		System.out.println("aaaa "+a.length);
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		BinarySearch  binarySerach=new BinarySearch();
 		int t=256;
