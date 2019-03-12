@@ -5,7 +5,7 @@ public class FirstThread extends Thread {
 	 * 1.定义Thread类的子类，并重写thread类的run()方法，该run()方法的方法体就是代表了线程要执行的任务，因此经常
 	 * 把run方法叫做线程执行体
 	 * 2.创建Thread子类的实例，即创建了线程。
-	 * 3.用线程对象的start()方法来执行线程。
+	 * 3.用线程对象的start()方法来启动线程。
 	 * 注意：使用继承Thread方法创建线程类，多条线程之间无法共享线程类的实例变量。
 	 */
 	private int i;
