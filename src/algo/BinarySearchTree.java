@@ -46,6 +46,60 @@ public class BinarySearchTree {
 		return tree;
 	}
 	//二叉查找树的删除操作
+	public void  delete(int data) {
+		//由于删除节点需要前置节点，所以需要两个节点存储
+		//pNode 用来存储节点
+		Node pNode=tree;
+		Node pNodePre=null;// 用来存储前置节点
+		//要删除节点，先找到该节点
+		while(pNode!=null&&pNode.data!=data) {
+			pNodePre=pNode;  //保存前置节点
+			if(data>pNode.data) {
+				pNode=pNode.right;
+			}else {
+				pNode=pNode.left;
+			}
+		}
+		//没有找到节点或者树为空的情况下
+		if(pNode==null) {
+			return ;
+		}
+		//整体删除节点p
+		//情况1：该节点既有左子树，又有右子树，找到右子树的最小值节点pMin，替换pNode然后删除pMin
+		if(pNode.left!=null&&pNode.right!=null) {
+			Node pMin=pNode.right;
+			Node pMinPre=pNode;
+			//找到最小值节点pMin
+			while(pMin.left!=null) {
+				pMinPre=pMin;
+				pMin=pMin.left;
+			}
+			pNode.data=pMin.data;
+			pNode=pMin;
+			pNodePre=pMinPre;
+		}
+		//情况2：pNode只有一个子节点或者无子节点
+		Node child=null;
+		if(pNode.left!=null) {
+			child=pNode.left;
+		}
+		else if(pNode.right!=null) {
+			child=pNode.right;
+		}
+		else {
+			child =null;
+		}
+		// 统一删除节点
+		//当删除根节点的时候
+		if(pNodePre==null) {
+			tree=child;
+		}
+		if(pNodePre.left==pNode) {
+			pNodePre.left=child;
+		}else {
+			pNodePre.right=child;
+		}
+	}
 	public static class Node{
 		private int data;
 		private Node left;
