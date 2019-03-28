@@ -1,5 +1,7 @@
 package algo;
 
+import java.util.LinkedList;
+
 public class Heap {
 	private int[] a; //堆存储的数组
 	private int n;   // 堆的大小
@@ -37,7 +39,7 @@ public class Heap {
 		//要注意 边界条件：叶子节点的下标 要小于 count
 		while(true) {
 			if(2*i<=count&&a[2*i]>a[maxPos]) maxPos=2*i;
-			if((2*i+1)<=count&&a[2*1+1]>a[maxPos]) maxPos=2*i+1;
+			if((2*i+1)<=count&&a[2*i+1]>a[maxPos]) maxPos=2*i+1;
 			if(maxPos==i) {
 				break;
 			}
@@ -60,6 +62,7 @@ public class Heap {
 		}
 	}
 	//堆排序
+	// 时间复杂度为O(nlogn),空间复杂度为O(1),是不稳定的排序算法
 	public  void  sort(int[] a,int count) {
 		if(count==0) {
 			//空堆直接退出
@@ -69,6 +72,7 @@ public class Heap {
 		buildHeap(a, count);
 		for(int i=count;i>1;i--) {
 			swap(a, i, 1);
+			//从上往下排序
 			heapify(a, count, 1);
 		}
 	}
