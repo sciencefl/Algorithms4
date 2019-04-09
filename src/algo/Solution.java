@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.parsers.DocumentBuilder;
+
+import org.omg.CORBA.TRANSACTION_MODE;
+
 import Foundamentals.Stack;
 import edu.princeton.cs.algs4.SET;
 
@@ -151,11 +155,6 @@ public class Solution {
     	
     	return head;
     }
-    public static void main(String[] args) {
-    	Solution solution =new Solution();
-    //	System.out.println(solution.climbStairs(2));
-    	System.out.println(solution.mySqrt(2147395600));
-    }
     public int mySqrt1(int x) {
         long t = x;
 	t = 0x5f3759df - (t >> 1);
@@ -181,6 +180,148 @@ public class Solution {
     		mid=low+((high-low)>>1);
     	}
     	return (int)mid;
+    }
+    //反转字符串中的所有单词
+    public String reverseWords(String s) {
+        if(s == null || s.length() == 0)
+        	return "";
+        String[] all_word = s.split(" ");
+        int i = 0;
+        int j = all_word.length - 1;
+        while(i <= j){
+            String tmp = all_word[i];
+            all_word[i] = all_word[j];
+            all_word[j] = tmp;
+            i++;
+            j--;
+        }
+        StringBuilder result = new StringBuilder();
+        for(int k = 0; k < all_word.length; k++){
+            all_word[k] = all_word[k].trim();
+            if(all_word[k].equals(""))
+                continue;
+            result.append(all_word[k] + " ");
+        }
+        if(result.length() > 0){
+            result.setLength(result.length() - 1);
+        }
+        return result.toString();
+    }
+    //反转字符串
+    public void reverseString(char[] s) {
+    	if(s==null||s.length==0) {
+    		return ;
+    	}
+    	//高低数组下标，用于转换字符串
+        int low=0;
+        int high=s.length-1;
+        while(low<high) {
+        	//创建辅助变量，用于数据交换
+        	 char temp=s[low];
+        	 s[low]=s[high];
+        	 s[high]=temp;
+        	 low++;
+        	 high--;
+        }
+    }
+    /**
+     * 反转单词
+     * @param s
+     * 思路：
+     * 1.要想反转所有单词，则需要按照反转字符串的思想，只是把单位由字符，变化为字符串
+     * 2.按照" "空格分割字符串，存入字符串数组，然后反转。
+     * 3.按照“ ”空格拼接原则，拼接， 返回即可
+     * @return
+     */
+    public String reverseWord(String s) {
+    	// 第0步：边界判断
+    	if(s==null||s=="") {
+    		return "";
+    	}
+    	//第一步:分割整个字符串，成为字符串数组
+    	String[] arrayWord=s.split(" ");
+    	//第二步：反转整个字符串
+    	int low=0;
+    	int high=arrayWord.length-1;
+    	while(low<high) {
+    		String temp=arrayWord[low];
+    		arrayWord[low]=arrayWord[high];
+    		arrayWord[high]=temp;
+    		low++;
+    		high--;
+    	}
+    	//第三部，空格拼接原则
+    	StringBuilder result=new StringBuilder();//String ，StringBuffer,StringBuilder区别。
+    	for(int i=0;i<arrayWord.length;i++) {
+    		arrayWord[i]=arrayWord[i].trim();
+    		if(arrayWord[i].equals("")) {
+    			continue;
+    		}
+    		result.append(arrayWord[i]+" ");
+    	}
+    	//去除末尾最后一个空格
+    	if(result.length()>0) {
+    		result.setLength(result.length()-1);
+    	}
+    	return result.toString();
+    }
+    /**
+     * 字符串转换整数
+     * 如果前面有空格，需要剔除空格；
+     * 剔除空格后，第一个字符串如果是+号，认为是正数；如果是-号，认为是负数；
+     * 后面的字符如果不是数字，那么返回0，如果是数字，返回实际的数字。遇到不是数字的字符，转换结束。
+     * @param str
+     * @return
+     */
+    public int myAtoi(String str) {
+    	//第0步，判断有效性
+    	if(str==null||str=="") {
+    		return 0;
+    	}
+    	//第1步，剔除空格
+    	int strLength=str.length();
+    	int index=0;//字符游标
+    	int sign=1;//判断正负的时候用的
+    	while(index<strLength&&str.charAt(index)==' ') {
+    		index++;
+    	}
+    	//如果全是空格的话
+    	if(index==strLength) {
+    		return 0;
+    	}
+    	//第2步，判断正负
+    	if(str.charAt(index)=='-') {
+    		sign=-1;
+    		index++;
+    	}else if(str.charAt(index)=='+') {
+    		sign=1;
+    		index++;
+    	}
+    	//第3步，累加运算
+    	double sum=0;
+    	while(index<strLength) {
+    		char temp=str.charAt(index);
+    		if(temp>='0'&&temp<='9') {
+    			sum=sum*10+(int)(temp-'0');
+    			index++;
+    		}else 
+    			break;
+    	}
+    	sum=sum*sign;
+    	
+        return  (int)sum;
+    }
+    public void test(String s) {
+    	s=s.trim();
+    	System.out.println(s);
+    	
+    }
+    public static void main(String[] args) {
+    	Solution solution =new Solution();
+    //	System.out.println(solution.climbStairs(2));
+    //	System.out.println(solution.mySqrt(2147395600));
+    	solution.test("    zhangfulinag     ");
+    	System.out.println(solution.myAtoi(" "));
     }
 
 
