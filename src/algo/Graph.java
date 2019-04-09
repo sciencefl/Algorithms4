@@ -66,9 +66,21 @@ public class Graph {
 			}
 		}
 	}
-	//深度优先遍历
+	//深度优先遍历--非递归实现
 	public  void dfs(int s,int t) {
+		if(s==t) {
+			return ;
+		}
+		//初始化
+		boolean[] visited=new boolean[size];
+		visited[s]=true;
+		//确定是否已经找到
+		boolean found=false;
 		
+		int[] prev=new int[size];
+		for(int i=1;i<size;i++) {
+			prev[i]=-1;
+		}
 	}
 	// 由于prev中存储的是逆序的，所以采用递归反序打印
 	public void print(int[] prev,int s,int t) {
