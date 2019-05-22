@@ -1,6 +1,5 @@
 package jianzhiOffer;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Solution10_19 {
@@ -150,5 +149,105 @@ public class Solution10_19 {
     }
     private boolean isEven(int n) {
     	return (n&1)==0;
+    }
+    /**
+              *   返回倒数第K个节点，采用双指针策略, ，考查代码的鲁棒性
+     * @param head  
+     * @param k
+     * @return 
+     */
+    public ListNode FindKthToTail(ListNode head,int k) {
+    	ListNode firstNode=head;
+    	ListNode secondNode=head;
+    	if(head==null||k==0) {
+    		return null;
+    	}
+    	for(int i=0;i<k-1;i++) {
+    		firstNode=firstNode.next;
+    		if(firstNode==null) {
+    			return null;
+    		}
+    	}
+    	while(firstNode.next!=null) {
+    		firstNode=firstNode.next;
+    		secondNode=secondNode.next;
+    	}
+    	return secondNode;
+    }
+    /**
+     * @des  反转链表 
+     * @param head
+     * @return
+     */
+    public ListNode ReverseList(ListNode head) {
+    	ListNode preNode=null;
+    	ListNode pNode=head;
+    	ListNode nextNode=null;
+    	while(pNode!=null) {
+    		nextNode=pNode.next;
+    		pNode.next=preNode;
+    		preNode=pNode;
+    		pNode=nextNode;	
+    	}
+    	return preNode;
+    }
+    /**
+     * @  合并有序的链表
+     * @param list1
+     * @param list2
+     * @return
+     */
+    public ListNode Merge(ListNode list1,ListNode list2) {
+        if (list1==null) {
+			return list2;
+		}
+        if (list2==null) {
+        	return list1;
+        }
+        ListNode mergeNode=null;
+        if(list1.val<list2.val) {
+        	mergeNode=list1;
+        	mergeNode.next=Merge(list1.next, list2);
+        }else {
+			mergeNode=list2;
+			mergeNode.next=Merge(list1, list2.next);
+		}
+        return mergeNode;
+    }
+    /**
+     * @ 树的子结构 考查二叉树的遍历操作  递归和 和循环   1.查找是否有根节点相同的节点，2.查找是否存在子树
+     * @param root1
+     * @param root2
+     * @return
+     */
+    public boolean HasSubtree(TreeNode root1,TreeNode root2) {
+    	boolean result=false;
+    	if(root1==null||root2==null) {
+    		return result;
+    	}
+    	if(root1.val==root2.val) {
+    		result=isRoot1HasRoot2(root1,root2);
+    	}else {
+			result=HasSubtree(root1.left, root2);
+			if(!result) {
+				result=HasSubtree(root1.right, root2);
+			}
+		}
+        return result;
+    }
+    public boolean isRoot1HasRoot2(TreeNode root1,TreeNode root2) {
+    	boolean result=false;
+    	if(root2==null) {
+    		return true;
+    	}
+    	if(root1==null) {
+    		return false;
+    	}
+    	if(root1.val==root2.val) {
+    		result=isRoot1HasRoot2(root1.left, root2.left)&&isRoot1HasRoot2(root1.right, root2.right);
+    	} else {
+			result=false;
+		}
+    	return result;
     }
 }
