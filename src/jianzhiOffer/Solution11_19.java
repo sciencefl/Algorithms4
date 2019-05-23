@@ -167,4 +167,43 @@ public class Solution11_19 {
         boolean right=VerifySubSeqOfBST(mid, end-1, sequence);
         return left&&right;
     }
+    /**
+     *  二叉树中和为某一值的路径::没有弄懂
+     */
+    ArrayList<ArrayList<Integer>> listAll=new ArrayList<>();
+    ArrayList<Integer> list=new ArrayList<>();
+    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root,int target) {
+    	if(root==null) {
+    		return listAll;
+    	}
+    	list.add(root.val);
+    	if(root.val==target&&root.left==null&&root.right==null) {
+    		listAll.add(new ArrayList<>(list));
+    	}
+    	target-=root.val;
+    	FindPath(root.left, target);
+    	FindPath(root.right, target);
+   		list.remove(list.size()-1);
+        return listAll;
+    }
+    /**
+     * 复杂链表的复制
+     * @param pHead
+     * @return
+     */
+    public RandomListNode Clone(RandomListNode pHead)
+    {
+        RandomListNode head=new RandomListNode(0);
+        return head;
+        
+    }
+}
+class RandomListNode {
+    int label;
+    RandomListNode next = null;
+    RandomListNode random = null;
+
+    RandomListNode(int label) {
+        this.label = label;
+    }
 }
