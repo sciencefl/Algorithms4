@@ -13,6 +13,8 @@ public class Solution11_19 {
 		TreeNode root=null;
 		ArrayList<Integer> arrayList=solution11_19.PrintFromTopToBottom(root);
 		System.out.println(arrayList);
+		int[] sequence= {};
+		System.out.println(solution11_19.VerifySquenceOfBST(sequence));
 	}
 	/**
 	 * 镜像二叉树
@@ -121,6 +123,8 @@ public class Solution11_19 {
     public ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
     	LinkedList<TreeNode> linkedlist =new LinkedList();
         ArrayList<Integer> arrayList = new ArrayList<>();
+        if(root==null)
+        	return arrayList;
         linkedlist.add(root);
         while(!linkedlist.isEmpty()) {
         	TreeNode tempNode=linkedlist.poll();
@@ -133,5 +137,34 @@ public class Solution11_19 {
         	}
         }
         return arrayList;
+    }
+    /**
+     * 二叉搜索树的后续遍历序列
+     */
+    public boolean VerifySquenceOfBST(int [] sequence) {
+    	if(sequence==null||sequence.length==0) {
+    		return false;
+    	}
+    	return VerifySubSeqOfBST(0, sequence.length-1, sequence);
+
+    }
+    public boolean VerifySubSeqOfBST(int start,int end,int[] sequence) {
+        int mid=end;// 表示右子树的第一个节点
+        boolean flag=false;
+        if(end-start<=1) { // 如果这个左子树只有一个节点或者没有节点，直接返回true；
+        	return true;
+        }
+        for(int i=start;i<end;i++) {
+        	if(sequence[i]>sequence[end]&&flag==false) {
+        		mid=i;
+        		flag=true;
+        	}
+        	if(sequence[i]<sequence[end]&&flag) {
+        		return false;
+        	}
+        }
+        boolean left=VerifySubSeqOfBST(start,mid-1, sequence);
+        boolean right=VerifySubSeqOfBST(mid, end-1, sequence);
+        return left&&right;
     }
 }
