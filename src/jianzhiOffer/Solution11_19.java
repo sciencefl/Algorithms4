@@ -1,7 +1,10 @@
 package jianzhiOffer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import edu.princeton.cs.algs4.Stack;
 
@@ -193,9 +196,86 @@ public class Solution11_19 {
      */
     public RandomListNode Clone(RandomListNode pHead)
     {
-        RandomListNode head=new RandomListNode(0);
-        return head;
+        if(pHead==null) {
+        	return null;
+        }
+    	RandomListNode head=new RandomListNode(pHead.label);
+        // 用一个MAP来存储备忘录
+        Map<Integer, RandomListNode> map =new HashMap<>();
+        //第一步通过next指针得到 N'
+        RandomListNode pHeadTemp=pHead;
+        RandomListNode headTemp=head;
+        map.put(headTemp.label, headTemp);
+        while(pHeadTemp.next!=null) {
+        	RandomListNode tempNode=new RandomListNode(pHeadTemp.next.label);
+        	headTemp.next=tempNode;
+        	headTemp=headTemp.next;
+        	pHeadTemp=pHeadTemp.next;
+        	map.put(tempNode.label, tempNode);
+        }
+        headTemp.next=null;
+        //第二步，寻找身边的人
+        headTemp=head;
+        pHeadTemp=pHead;
+        while(pHeadTemp.next!=null) {
+        	if(pHeadTemp.random!=null) {
+        		headTemp.random=map.get(pHeadTemp.random.label);
+        	}
+        	pHeadTemp=pHeadTemp.next;
+        	headTemp=headTemp.next;
+        }
+        return head;   
+    }
+    /**
+     * 二叉搜索树与双向链表 , java 传参的问题，值传递还是引用传递
+     * Java中传参都是值传递，如果是基本类型，就是对值的拷贝，如果是对象，就是对引用地址的拷贝
+     */
+    private TreeNode pre = null;
+    private TreeNode head = null;
+    public TreeNode Convert(TreeNode pRootOfTree) {
+        //中序遍历的变形 ，对于一个节点来说，比它小的节点在左子树，\
+    	inOrder(pRootOfTree);
+    	return head;
+    }
+    public void  inOrder(TreeNode root) {
+    	if(root==null) {
+    		return;
+    	}
+    	inOrder(root.left);
+    	if(root.left==null&&head==null) {
+    		head=root;
+    	}
+    	if(pre!=null) {
+    		root.left=pre;
+    		pre.right=root;
+    	}
+    	pre=root;
+    	inOrder(root.right);
+    }
+    /**
+     * 字符串的排列,
+     */
+    ArrayList<String> arrayList = new ArrayList<>();
+    public ArrayList<String> Permutation(String str) {
+        if(str==null||str=="") {
+        	return arrayList;
+        }
+         //遇到字符串的操作问题，先将字符串改为字符数组
+        char[] strChar=str.toCharArray();
+        Arrays.sort(strChar);
+        int count=strChar.length;
         
+        return arrayList;
+    }
+    public void sortChar(char[] strChar,int position,StringBuilder str) {
+    	if(str.length()==strChar.length) {
+    	}
+    	
+    }
+    public void swap(int i,int j,char[] strChar) {
+    	char temp=strChar[i];
+    	strChar[i]=strChar[j];
+    	strChar[j]=temp;
     }
 }
 class RandomListNode {
