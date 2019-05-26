@@ -255,27 +255,60 @@ public class Solution11_19 {
     /**
      * 字符串的排列,
      */
-    ArrayList<String> arrayList = new ArrayList<>();
+    private ArrayList<String> ret = new ArrayList<>();
+
     public ArrayList<String> Permutation(String str) {
-        if(str==null||str=="") {
-        	return arrayList;
-        }
-         //遇到字符串的操作问题，先将字符串改为字符数组
-        char[] strChar=str.toCharArray();
-        Arrays.sort(strChar);
-        int count=strChar.length;
-        
-        return arrayList;
+        if (str.length() == 0)
+            return ret;
+        char[] chars = str.toCharArray();
+        Arrays.sort(chars);
+        backtracking(chars, new boolean[chars.length], new StringBuilder());
+        return ret;
     }
-    public void sortChar(char[] strChar,int position,StringBuilder str) {
-    	if(str.length()==strChar.length) {
-    	}
-    	
+
+    private void backtracking(char[] chars, boolean[] hasUsed, StringBuilder s) {
+        if (s.length() == chars.length) {
+            ret.add(s.toString());
+            return;
+        }
+        for (int i = 0; i < chars.length; i++) {
+            if (hasUsed[i])
+                continue;
+            if (i != 0 && chars[i] == chars[i - 1] && !hasUsed[i - 1]) /* 保证不重复 */
+                continue;
+            hasUsed[i] = true;
+            s.append(chars[i]);
+            backtracking(chars, hasUsed, s);
+            s.deleteCharAt(s.length() - 1);
+            hasUsed[i] = false;
+        }
     }
     public void swap(int i,int j,char[] strChar) {
     	char temp=strChar[i];
     	strChar[i]=strChar[j];
     	strChar[j]=temp;
+    }
+    /**
+     * @ 数组中出现次数超过一半的数字
+     */
+    public int MoreThanHalfNum_Solution(int [] array) {
+    	if(array==null||array.length==0) {
+    		return 0;
+    	}
+    	boolean flag=false;
+       Map<Integer,Integer> map = new  HashMap<>();
+       int count=array.length;
+       for(int i=0;i<array.length;i++) {
+    	   if(map.containsKey(array[i])) {
+    		  map.put(array[i], map.get(array[i])+1);
+    		  if(map.get(array[i])*2>=count) {
+    			  flag=true;
+    			  return array[i];
+    		  }
+    	   }
+    	   map.put(array[i], 1);
+       }
+       return 0;
     }
 }
 class RandomListNode {
