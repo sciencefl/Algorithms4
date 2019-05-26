@@ -8,11 +8,11 @@ import java.util.Map;
 
 import edu.princeton.cs.algs4.Stack;
 
-public class Solution11_19 {
+public class Solution20_29 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Solution11_19 solution11_19=new Solution11_19();
+		Solution20_29 solution11_19=new Solution20_29();
 		TreeNode root=null;
 		ArrayList<Integer> arrayList=solution11_19.PrintFromTopToBottom(root);
 		System.out.println(arrayList);
