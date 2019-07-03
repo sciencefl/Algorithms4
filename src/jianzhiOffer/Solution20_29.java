@@ -310,6 +310,24 @@ public class Solution20_29 {
        }
        return 0;
     }
+    /**
+     * @连续子数组的最大和
+     */
+    public int FindGreatestSumOfSubArray(int[] array) {
+    	int greatSum=array[0];
+    	int sum=0;
+    	for(int i=0;i<array.length;i++) {
+    		if(sum<=0) {
+    			sum=array[i];
+    		}else {
+				sum+=array[i];
+			}
+    		if(sum>greatSum) {
+    			greatSum=sum;
+    		}
+    	}
+    	return greatSum;
+    }
 }
 class RandomListNode {
     int label;
