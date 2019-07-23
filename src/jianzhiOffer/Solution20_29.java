@@ -1,12 +1,6 @@
 package jianzhiOffer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-
-import edu.princeton.cs.algs4.Stack;
+import java.util.*;
 
 public class Solution20_29 {
 
@@ -158,7 +152,7 @@ public class Solution20_29 {
         	return true;
         }
         for(int i=start;i<end;i++) {
-        	if(sequence[i]>sequence[end]&&flag==false) {
+        	if(sequence[i]>sequence[end]&&!flag) {
         		mid=i;
         		flag=true;
         	}
