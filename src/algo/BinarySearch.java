@@ -22,11 +22,14 @@ public class BinarySearch {
 		System.out.println(t);
 		int[] array= {6,5,4,3,7,7,2,1,9,100};
 		int[] array2= {1,2,3,4,5,6,7,8};
-		int[] array3= {};
+		int[] array3= {1,2,2,2,2,4,4,4,4,4};
 		int result=-1;
 //		result=binarySerach.simpleBinarySearch(array2,array2.length,8);
-		result=binarySerach.simpleBinarySearchRecursion(array2,array2.length,10);
-		System.out.println(result);
+//		result=binarySerach.simpleBinarySearchRecursion(array2,array2.length,10);
+		result=binarySerach.binarySearchFirstPos(array3,4);
+		System.out.println("第一个位置为："+result);
+		result=binarySerach.binarySearchLastPos(array3,2);
+		System.out.println("最后位置为："+result);
 //		sort.bubbleSort(array2, array2.length);
 //		sort.insertionSort(array,array.length); 
 //		sort.selectionSort(array,array.length);
@@ -81,5 +84,59 @@ public class BinarySearch {
 			return simpleBinarySearchRecursion_c(a, mid+1, high, value);
 		}
 	}
+
+	/**
+	 * 获取array数组中 value出现的第一个位置的下标
+	 * @param array
+	 * @param value
+	 * @return
+	 */
+	public int binarySearchFirstPos(int[] array,int value){
+		if(array==null||array.length==0){
+			return -1;
+		}
+		int low=0;
+		int high=array.length-1;
+		while(low<=high){
+			int mid=low+((high-low)>>1);
+			if(array[mid]<value){
+				low=mid+1;
+			}else if(array[mid]>value){
+				high=mid-1;
+			}else {
+				if(mid==0||array[mid-1]!=value)
+					return mid;
+				else high=mid-1;
+			}
+		}
+		return -1;
+	}
+	/**
+	 * 获取array数组中 value出现的最后位置的下标
+	 * @param array
+	 * @param value
+	 * @return
+	 */
+	public int binarySearchLastPos(int[] array,int value){
+		if(array==null||array.length==0){
+			return -1;
+		}
+		int low=0;
+		int high=array.length-1;
+		while(low<=high){
+			int mid=low+((high-low)>>1);
+			if(array[mid]<value){
+				low=mid+1;
+			}else if(array[mid]>value){
+				high=mid-1;
+			}else {
+				if(mid==(array.length-1)||array[mid+1]!=value)
+					return mid;
+				else low=mid+1;
+			}
+		}
+		return -1;
+	}
+
 
 }
