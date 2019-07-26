@@ -1,6 +1,6 @@
 package jianzhiOffer;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Solution30_39 {
 	
@@ -9,10 +9,13 @@ public class Solution30_39 {
 		Solution30_39 solution30_39=new Solution30_39();
 		int i=solution30_39.FirstNotRepeatingChar("abcd345");
 		int[] abc=new int[100];
+		int[] array={1,2,3,3,3,3};
+		int m = solution30_39.bsearch(array,4);
+		System.out.println("位置为"+m);
 		abc['a']=1111;
-		for(int j:abc) {
-			System.out.println('a');
-		}
+//		for(int j:abc) {
+//			System.out.println('a');
+//		}
 	}
 	/**
 	 *  丑数
@@ -63,4 +66,110 @@ public class Solution30_39 {
         }
         return l1;
     }
+
+	/**
+	 * 坑点： 当array中没有的时候要返回0   采用HashMap的方式时间复杂度为O(n) 空间复杂度为O(n)，没有利用排序的特性
+	 * @param array
+	 * @param k
+	 * @return
+	 */
+	public int GetNumberOfK(int [] array , int k) {
+		HashMap<Integer,Integer> map = new HashMap<>();
+		for(int i=0;i<array.length;i++){
+			if(map.containsKey(array[i])){
+				map.put(array[i],map.get(array[i])+1);
+			}else{
+				map.put(array[i],1);
+			}
+		}
+		return map.get(k)==null?0:map.get(k);
+	}
+	public int GetNumberOfK2(int [] array , int k) {
+		int first=bsearch(array,k);
+		int last=bsearch(array,k+1);
+		return last-first;
+	}
+
+	/**
+	 * 查找最后一个不大于 value的数组下标
+	 * @param array
+	 * @param value
+	 * @return
+	 */
+	public int bsearch(int[] array,int value){
+		if(array==null||array.length==0){
+			return -1;
+		}
+		int low=0;
+		int high=array.length-1;
+		while(low<=high){
+			int mid=low+((high-low)>>1);
+			if(array[mid]<value){
+				if(mid==array.length-1||array[mid+1]>=value){
+					return mid;
+				}
+				low=mid+1;
+			}else if(array[mid]>value) {
+				high = mid - 1;
+			}else {
+				high=mid-1;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 *  求二叉树的深度 ，用递归即可，非常简洁
+	 * @param root
+	 * @return
+	 */
+	public int TreeDepth(TreeNode root) {
+		if( root == null ){
+			return 0;
+		}
+		int leftDepth = TreeDepth(root.left);
+		int rightDepth = TreeDepth(root.right);
+		return leftDepth>rightDepth?(leftDepth+1):(rightDepth+1);
+	}
+
+	/**
+	 * 判断是否为平衡二叉树
+	 * @param root
+	 * @return
+	 */
+	public boolean IsBalanced_Solution(TreeNode root) {
+		if(root==null){
+			return true;
+		}
+		int leftDepth = TreeDepth( root.left);
+		int rightDepth = TreeDepth(root.right);
+		int diff=rightDepth-leftDepth;
+		if(diff>1||diff<-1){
+			return false;
+		}
+		return IsBalanced_Solution(root.left)&&IsBalanced_Solution(root.right);
+	}
+
+	/**
+	 * 数组中只出现一次的数字
+	 * @param array
+	 * @param num1
+	 * @param num2
+	 */
+	//num1,num2分别为长度为1的数组。传出参数
+	//将num1[0],num2[0]设置为返回结果
+	public void FindNumsAppearOnce(int [] array,int num1[] , int num2[]) {
+		int diff=0; //用来存储各个数组异或的结果
+		for (int i : array) {
+			diff^=array[i];
+		}
+		diff&=-diff; //此等操作是为了获得diff中最左侧不为0的数字
+		for(int j:array){
+			if((array[j]&diff)==0){
+				num1[0]^=array[j];
+			}else {
+				num2[0]^=array[j];
+			}
+		}
+	}
 }
