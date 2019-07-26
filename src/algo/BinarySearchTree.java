@@ -2,13 +2,13 @@ package algo;
 
 public class BinarySearchTree {
 	/**
-	 * ¶ş²æËÑË÷Ê÷£¬Ö§³Ö¿ìËÙµÄ²éÕÒ¡¢²åÈë¡¢É¾³ı²Ù×÷
-	 * ¶ş²æ²éÕÒÊ÷ÒªÇó£¬ÔÚÊ÷ÖĞµÄÈÎÒâÒ»¸ö½Úµã£¬Æä×ó×ÓÊ÷Ã¿¸ö½Úµã
-	 * Öµ£¬ÒªĞ¡ÓÚÕâ¸ö½ÚµãµÄÖµ£¬ÆäÓÒ×ÓÊ÷Ã¿¸ö½ÚµãµÄÖµ£¬Òª´óÓÚÕâ¸ö½ÚµãµÄÖµ
+	 * äºŒå‰æœç´¢æ ‘ï¼Œæ”¯æŒå¿«é€Ÿçš„æŸ¥æ‰¾ã€æ’å…¥ã€åˆ é™¤æ“ä½œ
+	 * äºŒå‰æŸ¥æ‰¾æ ‘è¦æ±‚ï¼Œåœ¨æ ‘ä¸­çš„ä»»æ„ä¸€ä¸ªèŠ‚ç‚¹ï¼Œå…¶å·¦å­æ ‘æ¯ä¸ªèŠ‚ç‚¹
+	 * å€¼ï¼Œè¦å°äºè¿™ä¸ªèŠ‚ç‚¹çš„å€¼ï¼Œå…¶å³å­æ ‘æ¯ä¸ªèŠ‚ç‚¹çš„å€¼ï¼Œè¦å¤§äºè¿™ä¸ªèŠ‚ç‚¹çš„å€¼
 	 */
-	// Ê÷µÄ¸ù½Úµã
+	// æ ‘çš„æ ¹èŠ‚ç‚¹
 	private Node tree;
-	// ¶ş²æ²éÕÒÊ÷µÄ²éÕÒ²Ù×÷ Ê±¼ä¸´ÔÓ¶ÈÎª O(logn)
+	// äºŒå‰æŸ¥æ‰¾æ ‘çš„æŸ¥æ‰¾æ“ä½œ æ—¶é—´å¤æ‚åº¦ä¸º O(logn)
 	public Node find(int data) {
 		Node pNode=tree;
 		while(pNode!=null) {
@@ -22,7 +22,7 @@ public class BinarySearchTree {
 		}
 		return null;
 	}
-	// ¶ş²æ²éÕÒÊ÷µÄ²åÈë²Ù×÷ £¬Ê±¼ä¸´ÔÓ¶ÈÒ²ÎªO(logn)
+	// äºŒå‰æŸ¥æ‰¾æ ‘çš„æ’å…¥æ“ä½œ ï¼Œæ—¶é—´å¤æ‚åº¦ä¹Ÿä¸ºO(logn)
 	public Node insert(int data) {
 		Node pNode=tree;
 		if(pNode==null) {
@@ -45,31 +45,31 @@ public class BinarySearchTree {
 		}
 		return tree;
 	}
-	//¶ş²æ²éÕÒÊ÷µÄÉ¾³ı²Ù×÷
+	//äºŒå‰æŸ¥æ‰¾æ ‘çš„åˆ é™¤æ“ä½œ
 	public void  delete(int data) {
-		//ÓÉÓÚÉ¾³ı½ÚµãĞèÒªÇ°ÖÃ½Úµã£¬ËùÒÔĞèÒªÁ½¸ö½Úµã´æ´¢
-		//pNode ÓÃÀ´´æ´¢½Úµã
+		//ç”±äºåˆ é™¤èŠ‚ç‚¹éœ€è¦å‰ç½®èŠ‚ç‚¹ï¼Œæ‰€ä»¥éœ€è¦ä¸¤ä¸ªèŠ‚ç‚¹å­˜å‚¨
+		//pNode ç”¨æ¥å­˜å‚¨èŠ‚ç‚¹
 		Node pNode=tree;
-		Node pNodePre=null;// ÓÃÀ´´æ´¢Ç°ÖÃ½Úµã
-		//ÒªÉ¾³ı½Úµã£¬ÏÈÕÒµ½¸Ã½Úµã
+		Node pNodePre=null;// ç”¨æ¥å­˜å‚¨å‰ç½®èŠ‚ç‚¹
+		//è¦åˆ é™¤èŠ‚ç‚¹ï¼Œå…ˆæ‰¾åˆ°è¯¥èŠ‚ç‚¹
 		while(pNode!=null&&pNode.data!=data) {
-			pNodePre=pNode;  //±£´æÇ°ÖÃ½Úµã
+			pNodePre=pNode;  //ä¿å­˜å‰ç½®èŠ‚ç‚¹
 			if(data>pNode.data) {
 				pNode=pNode.right;
 			}else {
 				pNode=pNode.left;
 			}
 		}
-		//Ã»ÓĞÕÒµ½½Úµã»òÕßÊ÷Îª¿ÕµÄÇé¿öÏÂ
+		//æ²¡æœ‰æ‰¾åˆ°èŠ‚ç‚¹æˆ–è€…æ ‘ä¸ºç©ºçš„æƒ…å†µä¸‹
 		if(pNode==null) {
 			return ;
 		}
-		//ÕûÌåÉ¾³ı½Úµãp
-		//Çé¿ö1£º¸Ã½Úµã¼ÈÓĞ×ó×ÓÊ÷£¬ÓÖÓĞÓÒ×ÓÊ÷£¬ÕÒµ½ÓÒ×ÓÊ÷µÄ×îĞ¡Öµ½ÚµãpMin£¬Ìæ»»pNodeÈ»ºóÉ¾³ıpMin
+		//æ•´ä½“åˆ é™¤èŠ‚ç‚¹p
+		//æƒ…å†µ1ï¼šè¯¥èŠ‚ç‚¹æ—¢æœ‰å·¦å­æ ‘ï¼Œåˆæœ‰å³å­æ ‘ï¼Œæ‰¾åˆ°å³å­æ ‘çš„æœ€å°å€¼èŠ‚ç‚¹pMinï¼Œæ›¿æ¢pNodeç„¶ååˆ é™¤pMin
 		if(pNode.left!=null&&pNode.right!=null) {
 			Node pMin=pNode.right;
 			Node pMinPre=pNode;
-			//ÕÒµ½×îĞ¡Öµ½ÚµãpMin
+			//æ‰¾åˆ°æœ€å°å€¼èŠ‚ç‚¹pMin
 			while(pMin.left!=null) {
 				pMinPre=pMin;
 				pMin=pMin.left;
@@ -78,7 +78,7 @@ public class BinarySearchTree {
 			pNode=pMin;
 			pNodePre=pMinPre;
 		}
-		//Çé¿ö2£ºpNodeÖ»ÓĞÒ»¸ö×Ó½Úµã»òÕßÎŞ×Ó½Úµã
+		//æƒ…å†µ2ï¼špNodeåªæœ‰ä¸€ä¸ªå­èŠ‚ç‚¹æˆ–è€…æ— å­èŠ‚ç‚¹
 		Node child=null;
 		if(pNode.left!=null) {
 			child=pNode.left;
@@ -89,8 +89,8 @@ public class BinarySearchTree {
 		else {
 			child =null;
 		}
-		// Í³Ò»É¾³ı½Úµã
-		//µ±É¾³ı¸ù½ÚµãµÄÊ±ºò
+		// ç»Ÿä¸€åˆ é™¤èŠ‚ç‚¹
+		//å½“åˆ é™¤æ ¹èŠ‚ç‚¹çš„æ—¶å€™
 		if(pNodePre==null) {
 			tree=child;
 		}

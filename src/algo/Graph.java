@@ -1,10 +1,10 @@
 package algo;
 
-import java.util.LinkedList;
-
 import edu.princeton.cs.algs4.Queue;
+
+import java.util.LinkedList;
 public class Graph {
-	//ÄÚ²¿Àà,´æ´¢Í¼µÄ¶¥µã
+	//å†…éƒ¨ç±»,å­˜å‚¨å›¾çš„é¡¶ç‚¹
 	public class Vertex{
 		int data;
 		public Vertex(int data) {
@@ -12,13 +12,13 @@ public class Graph {
 		}
 	}
 	/**
-	 * ÎŞÏòÍ¼
-	 * ÁÚ½Ó±í
+	 * æ— å‘å›¾
+	 * é‚»æ¥è¡¨
 	 */
-	 private int size; // Í¼µÄ´óĞ¡
-	 private Vertex[] vertexs;// Í¼µÄ¶¥µã
-	 private LinkedList<Integer>  adj[];//ÁÚ½Ó±íÖĞÓÃÀ´´æ´¢¶¥µãÖ®¼äµÄÁ¬½Ó¹ØÏµ£¬´´½¨ÁËÒ»¸ö linkedlistµÄÊı×é£¬»¹Òª³õÊ¼»¯
-	 //³õÊ¼»¯
+	 private int size; // å›¾çš„å¤§å°
+	 private Vertex[] vertexs;// å›¾çš„é¡¶ç‚¹
+	 private LinkedList<Integer>  adj[];//é‚»æ¥è¡¨ä¸­ç”¨æ¥å­˜å‚¨é¡¶ç‚¹ä¹‹é—´çš„è¿æ¥å…³ç³»ï¼Œåˆ›å»ºäº†ä¸€ä¸ª linkedlistçš„æ•°ç»„ï¼Œè¿˜è¦åˆå§‹åŒ–
+	 //åˆå§‹åŒ–
 	 @SuppressWarnings("unchecked")
 	public Graph(int size) {
 		 this.size=size;
@@ -30,12 +30,12 @@ public class Graph {
 		 }
 		
 	}
-	 // ÎŞÏòÍ¼£¬Ìí¼Ó±ßµÄĞÅÏ¢,Ò»Ìõ±ß´æÁ½´Î
+	 // æ— å‘å›¾ï¼Œæ·»åŠ è¾¹çš„ä¿¡æ¯,ä¸€æ¡è¾¹å­˜ä¸¤æ¬¡
 	public void addEdge(int s,int t) {
 		adj[s].add(t);
 		adj[t].add(s);
 	}
-	//¹ã¶ÈÓÅÏÈ±éÀú
+	//å¹¿åº¦ä¼˜å…ˆéå†
 	public void bfs(int s,int t) {
 		if(s==t) {
 			return ;
@@ -66,15 +66,15 @@ public class Graph {
 			}
 		}
 	}
-	//Éî¶ÈÓÅÏÈ±éÀú--·Çµİ¹éÊµÏÖ
+	//æ·±åº¦ä¼˜å…ˆéå†--éé€’å½’å®ç°
 	public  void dfs(int s,int t) {
 		if(s==t) {
 			return ;
 		}
-		//³õÊ¼»¯
+		//åˆå§‹åŒ–
 		boolean[] visited=new boolean[size];
 		visited[s]=true;
-		//È·¶¨ÊÇ·ñÒÑ¾­ÕÒµ½
+		//ç¡®å®šæ˜¯å¦å·²ç»æ‰¾åˆ°
 		boolean found=false;
 		
 		int[] prev=new int[size];
@@ -82,7 +82,7 @@ public class Graph {
 			prev[i]=-1;
 		}
 	}
-	// ÓÉÓÚprevÖĞ´æ´¢µÄÊÇÄæĞòµÄ£¬ËùÒÔ²ÉÓÃµİ¹é·´Ğò´òÓ¡
+	// ç”±äºprevä¸­å­˜å‚¨çš„æ˜¯é€†åºçš„ï¼Œæ‰€ä»¥é‡‡ç”¨é€’å½’ååºæ‰“å°
 	public void print(int[] prev,int s,int t) {
 		if(prev[t]!=-1&&s!=t) {
 			print(prev, s, prev[t]);

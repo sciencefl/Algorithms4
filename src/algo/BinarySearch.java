@@ -3,12 +3,11 @@ package algo;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 
 public class BinarySearch {
 
 	/**
-	 * ¶ş·Ö²éÕÒ±Ê¼Ç:
+	 * äºŒåˆ†æŸ¥æ‰¾ç¬”è®°:
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -40,21 +39,21 @@ public class BinarySearch {
 		System.out.println(Arrays.toString(array));
 
 	}
-	//¼òµ¥¶ş·Ö²éÕÒ£¬¼ÙÉèÊı¾İÓĞĞò£¬ÇÒÎŞÖØ¸´Êı¾İ,·Çµİ¹éĞ´·¨
-	/*  Ê±¼ä¸´ÔÓ¶ÈÊÇ logn
-	 * ×¢ÒâÈıµã£º
-	 * 1.Ñ­»·ÍË³öÌõ¼şÊÇlow<=high
-	 * 2.midµÄÈ¡Öµ Îª  mid =low+(high-low)>>1;
-	 * 3.lowºÍhighµÄ¸üĞÂ
-	 * Ï¸½Ú×¢Òâ£º
-	 *½«mid = lo + (hi - lo) /2£¬½«³ı·¨ÓÅ»¯³ÉÒÆÎ»ÔËËãÊ±£¬
-	 *µÃ×¢ÒâÔËËã·ûµÄÓÅÏÈ¼¶£¬Ç§Íò²»ÄÜĞ´³ÉÕâÑù£ºmid = lo + (hi - lo) >> 1
+	//ç®€å•äºŒåˆ†æŸ¥æ‰¾ï¼Œå‡è®¾æ•°æ®æœ‰åºï¼Œä¸”æ— é‡å¤æ•°æ®,éé€’å½’å†™æ³•
+	/*  æ—¶é—´å¤æ‚åº¦æ˜¯ logn
+	 * æ³¨æ„ä¸‰ç‚¹ï¼š
+	 * 1.å¾ªç¯é€€å‡ºæ¡ä»¶æ˜¯low<=high
+	 * 2.midçš„å–å€¼ ä¸º  mid =low+(high-low)>>1;
+	 * 3.lowå’Œhighçš„æ›´æ–°
+	 * ç»†èŠ‚æ³¨æ„ï¼š
+	 *å°†mid = lo + (hi - lo) /2ï¼Œå°†é™¤æ³•ä¼˜åŒ–æˆç§»ä½è¿ç®—æ—¶ï¼Œ
+	 *å¾—æ³¨æ„è¿ç®—ç¬¦çš„ä¼˜å…ˆçº§ï¼Œåƒä¸‡ä¸èƒ½å†™æˆè¿™æ ·ï¼šmid = lo + (hi - lo) >> 1
 	 */
 	public int simpleBinarySearch(int[] a,int n,int value){
 		int low=0;
 		int high=n-1;
 		while(low<=high) {
-			int mid =low+((high-low)>>1); //Í¨¹ıÎ»ÔËËã £¬¶ø²»ÊÇ (high+low)/2  ÊÇÎªÁË·ÀÖ¹ Òç³ö£¬ÒÆÎ»ÊÇÒòÎª¼ÆËã»ú´¦ÀíÎ»ÔËËãÒª¿ìµÃ¶à
+			int mid =low+((high-low)>>1); //é€šè¿‡ä½è¿ç®— ï¼Œè€Œä¸æ˜¯ (high+low)/2  æ˜¯ä¸ºäº†é˜²æ­¢ æº¢å‡ºï¼Œç§»ä½æ˜¯å› ä¸ºè®¡ç®—æœºå¤„ç†ä½è¿ç®—è¦å¿«å¾—å¤š
 			if(value==a[mid]) {
 				return mid;
 			}else if(a[mid]<value) {
@@ -65,7 +64,7 @@ public class BinarySearch {
 		}
 		return -1;
 	}
-	//¶ş·Ö²éÕÒµÄµİ¹é·½·¨
+	//äºŒåˆ†æŸ¥æ‰¾çš„é€’å½’æ–¹æ³•
 	public int simpleBinarySearchRecursion(int[] a,int n,int value) {
 		return simpleBinarySearchRecursion_c(a, 0, n-1, value);
 	}
