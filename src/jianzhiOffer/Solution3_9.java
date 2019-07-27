@@ -2,7 +2,6 @@ package jianzhiOffer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Stack;
 
@@ -24,7 +23,7 @@ public class Solution3_9 {
     	}
     	int rows=array.length;
     	int columns=array[0].length;
-    	// ´ÓÓÒÉÏ½Ç¿ªÊ¼Ñ°ÕÒ£¬ÒòÎª´Ó×óÉÏ½Ç ºÍÓÒÏÂ½Ç²»ÄÜËõĞ¡·¶Î§
+    	// ä»å³ä¸Šè§’å¼€å§‹å¯»æ‰¾ï¼Œå› ä¸ºä»å·¦ä¸Šè§’ å’Œå³ä¸‹è§’ä¸èƒ½ç¼©å°èŒƒå›´
     	int row=0;
     	int column=columns-1;
     	while(row<rows&&column>=0) {
@@ -40,25 +39,25 @@ public class Solution3_9 {
     	return found;
     }
     /**
-     * ½£Ö¸offer Ìæ»»¿Õ¸ñ
+     * å‰‘æŒ‡offer æ›¿æ¢ç©ºæ ¼
      */
     public String replaceSpace(StringBuffer str) {
     	/**
-    	 * Á½ÖÖ·½·¨£¬µÚÒ»ÖÖ¾ÍÊÇ´ÓÇ°µ½ºó±éÀú×Ö·û´®£¬Óöµ½¿Õ¸ñ¾ÍÌæ»»£¬ÕâÑùµÄÓĞO(n)¸ö¿Õ¸ñµÄ£¬Ê±¼ä¸´ÔÓ¶ÈÎªO(n2)
-    	 * µÚ¶ş¾ÍÊÇ´ÓÇ°µ½ºóÒ»´Î±éÀú£¬È¡³ö¿Õ¸ñÊıÁ¿£¬È»ºó´ÓºóÏòÇ°ÒÆ¶¯£¬ÕâÑùÃ¿¸ö×Ö·ûÖ»ÊÇÒÆ¶¯Ò»´Î£¬ÕâÑù¾ÍÊÇO(n)
+    	 * ä¸¤ç§æ–¹æ³•ï¼Œç¬¬ä¸€ç§å°±æ˜¯ä»å‰åˆ°åéå†å­—ç¬¦ä¸²ï¼Œé‡åˆ°ç©ºæ ¼å°±æ›¿æ¢ï¼Œè¿™æ ·çš„æœ‰O(n)ä¸ªç©ºæ ¼çš„ï¼Œæ—¶é—´å¤æ‚åº¦ä¸ºO(n2)
+    	 * ç¬¬äºŒå°±æ˜¯ä»å‰åˆ°åä¸€æ¬¡éå†ï¼Œå–å‡ºç©ºæ ¼æ•°é‡ï¼Œç„¶åä»åå‘å‰ç§»åŠ¨ï¼Œè¿™æ ·æ¯ä¸ªå­—ç¬¦åªæ˜¯ç§»åŠ¨ä¸€æ¬¡ï¼Œè¿™æ ·å°±æ˜¯O(n)
     	 */
-    	//µÚ0²½£¬¼ìÑé±ß½ç
+    	//ç¬¬0æ­¥ï¼Œæ£€éªŒè¾¹ç•Œ
     	if(str==null||str.length()==0) {
     		return str.toString();
     	}
-    	//µÚ1²½£º ±éÀú×Ö·û´®£¬²é¿´¿Õ¸ñÊıÁ¿,²¢À©Èİ
+    	//ç¬¬1æ­¥ï¼š éå†å­—ç¬¦ä¸²ï¼ŒæŸ¥çœ‹ç©ºæ ¼æ•°é‡,å¹¶æ‰©å®¹
     	int orgionalNum=str.length()-1;
     	for(int i=0;i<=orgionalNum;i++) {
     		if(str.charAt(i) == ' ') {
     			str.append("  ");
     		}
     	}
-    	//µÚ¶ş²½£¬½øĞĞ¸´ÖÆ
+    	//ç¬¬äºŒæ­¥ï¼Œè¿›è¡Œå¤åˆ¶
     	int newNum=str.length()-1;
     	while(orgionalNum>=0) {
     		if(str.charAt(orgionalNum)==' ') {
@@ -74,8 +73,8 @@ public class Solution3_9 {
     	return  str.toString();	
     }
     /**
-     * ´ÓÎ²µ½Í·´òÓ¡Á´±í£¨·´×ªÁ´±í£©, ÒªÑ¯ÎÊÃæÊÔ¹ÙÊÇ·ñ¿ÉÒÔĞŞ¸ÄÊäÈëµÄÊı¾İ
-     * ÓÉÓÚĞèÒª´ÓÍ·µ½Î²±éÀú£¬ÓÖÒª´ÓÎ²µ½Í·Êä³ö£¬ÊÇÕ»½á¹¹
+     * ä»å°¾åˆ°å¤´æ‰“å°é“¾è¡¨ï¼ˆåè½¬é“¾è¡¨ï¼‰, è¦è¯¢é—®é¢è¯•å®˜æ˜¯å¦å¯ä»¥ä¿®æ”¹è¾“å…¥çš„æ•°æ®
+     * ç”±äºéœ€è¦ä»å¤´åˆ°å°¾éå†ï¼Œåˆè¦ä»å°¾åˆ°å¤´è¾“å‡ºï¼Œæ˜¯æ ˆç»“æ„
      */
     public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
         ArrayList<Integer> arraIntegers=new ArrayList<>();
@@ -90,7 +89,7 @@ public class Solution3_9 {
         return arraIntegers;
     }
     /**
-     * ÖØ½¨¶ş²æÊ÷£¬ÀûÓÃ¶ş²æÊ÷µÄÇ°ĞòºÍÖĞĞò±éÀúÀ´»¹Ô­¶ş²æÊ÷
+     * é‡å»ºäºŒå‰æ ‘ï¼Œåˆ©ç”¨äºŒå‰æ ‘çš„å‰åºå’Œä¸­åºéå†æ¥è¿˜åŸäºŒå‰æ ‘
      */
     Map<Integer,Integer> map=new HashMap<Integer, Integer>();
     public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
@@ -111,7 +110,7 @@ public class Solution3_9 {
     	return headNode;
     }
     /**
-     * ÓÃÁ½¸öÕ»À´ÊµÏÖ¶ÓÁĞ  £¬stack1 ÓÃÀ´ÊäÈëin,stack2ÓÃÀ´Êä³öout
+     * ç”¨ä¸¤ä¸ªæ ˆæ¥å®ç°é˜Ÿåˆ—  ï¼Œstack1 ç”¨æ¥è¾“å…¥in,stack2ç”¨æ¥è¾“å‡ºout
      */
     Stack<Integer> stack1 = new Stack<Integer>();
     Stack<Integer> stack2 = new Stack<Integer>();
@@ -133,11 +132,11 @@ public class Solution3_9 {
     	return stack2.pop();
     }
     /**
-     *  ¶ş²æÊ÷ÖĞĞòµÄÏÂÒ»¸ö½Úµã
+     *  äºŒå‰æ ‘ä¸­åºçš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
      */
     public TreeLinkNode GetNext(TreeLinkNode pNode)
     {
-    	//µÚÒ»ÖÖÇé¿ö£¬Èç¹û¸Ã½Úµã´æÔÚÓÒ×Ó½Úµã£¬ÄÇÃ´·µ»Ø¸ÃÓÒ×Ó½ÚµãµÄ×î×ó½Úµã
+    	//ç¬¬ä¸€ç§æƒ…å†µï¼Œå¦‚æœè¯¥èŠ‚ç‚¹å­˜åœ¨å³å­èŠ‚ç‚¹ï¼Œé‚£ä¹ˆè¿”å›è¯¥å³å­èŠ‚ç‚¹çš„æœ€å·¦èŠ‚ç‚¹
     	if(pNode.right!=null) {
     		pNode=pNode.right;
     		while(pNode.left!=null) {
@@ -154,14 +153,14 @@ public class Solution3_9 {
 			}
     		
     	}
-    	//µÚ¶şÖÖÇé¿ö£¬Èç¹û¸Ã½ÚµãÃ»ÓĞÓÒ×Ó½Úµã£¬ÄÇÃ´·µ»Ø µÚÒ»¸öÁ´½Ó×ó×ÓÊ÷ °üº¬¸Ã½ÚµãµÄ½Úµã
+    	//ç¬¬äºŒç§æƒ…å†µï¼Œå¦‚æœè¯¥èŠ‚ç‚¹æ²¡æœ‰å³å­èŠ‚ç‚¹ï¼Œé‚£ä¹ˆè¿”å› ç¬¬ä¸€ä¸ªé“¾æ¥å·¦å­æ ‘ åŒ…å«è¯¥èŠ‚ç‚¹çš„èŠ‚ç‚¹
         return pNode;
     }
     /**
-     * ì³²¨ÄÇÆõÊıÁĞ
+     * æ–æ³¢é‚£å¥‘æ•°åˆ—
      */
     public int Fibonacci(int n) {
-    	// µ±×ÓÎÊÌâÖ®¼ä´æÔÚÖØ¸´µÄÊ±ºò£¬¿ÉÒÔ²ÉÓÃ×ÔÏÂÏòÉÏµÄ·½·¨¼ÆËã£¬À´Ìá¸ßĞ§ÂÊ
+    	// å½“å­é—®é¢˜ä¹‹é—´å­˜åœ¨é‡å¤çš„æ—¶å€™ï¼Œå¯ä»¥é‡‡ç”¨è‡ªä¸‹å‘ä¸Šçš„æ–¹æ³•è®¡ç®—ï¼Œæ¥æé«˜æ•ˆç‡
     	if(n==0) {
     		return  0;
     	}
