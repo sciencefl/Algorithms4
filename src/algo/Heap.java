@@ -1,19 +1,17 @@
 package algo;
 
-import java.util.LinkedList;
-
 public class Heap {
-	private int[] a; //å †å­˜å‚¨çš„æ•°ç»„
-	private int n;   // å †çš„å¤§å°
-	private int count; //å †ä¸­å·²æœ‰å…ƒç´ æ•°é‡
+	private int[] a; //¶Ñ´æ´¢µÄÊı×é
+	private int n;   // ¶ÑµÄ´óĞ¡
+	private int count; //¶ÑÖĞÒÑÓĞÔªËØÊıÁ¿
 	public Heap(int capacity) {
 		a=new int[capacity];
 		n=capacity;
 		count=0;	
 	}
-	//å¾€å †ä¸­æ’å…¥ä¸€ä¸ªå…ƒç´ 
+	//Íù¶ÑÖĞ²åÈëÒ»¸öÔªËØ
 	public  void insert(int data) {
-		//å¦‚æœå †å·²æ»¡
+		//Èç¹û¶ÑÒÑÂú
 		if(count==n) {
 			return ;
 		}
@@ -24,19 +22,19 @@ public class Heap {
 			i=i/2;
 		}
 	}
-	//åˆ é™¤å †é¡¶å…ƒç´ 
+	//É¾³ı¶Ñ¶¥ÔªËØ
 	public  void  removeMax() {
-		if(count==0) { // å †ä¸ºç©ºçš„æƒ…å†µ
+		if(count==0) { // ¶ÑÎª¿ÕµÄÇé¿ö
 			return ;
 		}
 		a[1]=a[count];
 		count--;
 		heapify(a, count, 1);
 	}
-	//è‡ªä¸Šå¾€ä¸‹å †åŒ–
+	//×ÔÉÏÍùÏÂ¶Ñ»¯
 	public void heapify(int[] a,int count,int i) {
 		int maxPos=i;
-		//è¦æ³¨æ„ è¾¹ç•Œæ¡ä»¶ï¼šå¶å­èŠ‚ç‚¹çš„ä¸‹æ ‡ è¦å°äº count
+		//Òª×¢Òâ ±ß½çÌõ¼ş£ºÒ¶×Ó½ÚµãµÄÏÂ±ê ÒªĞ¡ÓÚ count
 		while(true) {
 			if(2*i<=count&&a[2*i]>a[maxPos]) maxPos=2*i;
 			if((2*i+1)<=count&&a[2*i+1]>a[maxPos]) maxPos=2*i+1;
@@ -47,32 +45,32 @@ public class Heap {
 			i=maxPos;
 		}
 	}
-	// åœ¨æ•°ç»„aä¸­äº¤æ¢ä¸‹æ ‡ä¸º i,jçš„å…ƒç´ çš„å€¼
+	// ÔÚÊı×éaÖĞ½»»»ÏÂ±êÎª i,jµÄÔªËØµÄÖµ
 	public void  swap(int[]a,int i,int j) {
 		int temp;
 		temp=a[i];
 		a[i]=a[j];
 		a[j]=temp;
 	}
-	//å»ºå †æ“ä½œ
+	//½¨¶Ñ²Ù×÷
 	public void buildHeap(int[] a,int count) {
-		// ä»åå¾€å‰å¤„ç†æ•°ç»„ï¼Œå¹¶ä¸”æ¯ä¸ªæ•°æ®ä»ä¸Šå¾€ä¸‹å †åŒ–
+		// ´ÓºóÍùÇ°´¦ÀíÊı×é£¬²¢ÇÒÃ¿¸öÊı¾İ´ÓÉÏÍùÏÂ¶Ñ»¯
 		for(int i=2/count;i>0;i--) {
 			heapify(a, count, i);
 		}
 	}
-	//å †æ’åº
-	// æ—¶é—´å¤æ‚åº¦ä¸ºO(nlogn),ç©ºé—´å¤æ‚åº¦ä¸ºO(1),æ˜¯ä¸ç¨³å®šçš„æ’åºç®—æ³•
+	//¶ÑÅÅĞò
+	// Ê±¼ä¸´ÔÓ¶ÈÎªO(nlogn),¿Õ¼ä¸´ÔÓ¶ÈÎªO(1),ÊÇ²»ÎÈ¶¨µÄÅÅĞòËã·¨
 	public  void  sort(int[] a,int count) {
 		if(count==0) {
-			//ç©ºå †ç›´æ¥é€€å‡º
+			//¿Õ¶ÑÖ±½ÓÍË³ö
 			return ;
 		}
-		//å»ºå †:å¤§æ ¹å †
+		//½¨¶Ñ:´ó¸ù¶Ñ
 		buildHeap(a, count);
 		for(int i=count;i>1;i--) {
 			swap(a, i, 1);
-			//ä»ä¸Šå¾€ä¸‹æ’åº
+			//´ÓÉÏÍùÏÂÅÅĞò
 			heapify(a, count, 1);
 		}
 	}
