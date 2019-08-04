@@ -32,10 +32,12 @@ public class Solution50_59 {
             if(leftFlag){
                 while(!leftFirst.isEmpty()){
                     TreeNode node=leftFirst.pop();
-                    if(node.left!=null)
+                    if(node.left!=null) {
                         rightFirst.push(node.left);
-                    if(node.right!=null)
+                    }
+                    if(node.right!=null) {
                         rightFirst.push(node.right);
+                    }
                     integers.add(node.val);
                 }
                 leftFlag=false;
@@ -43,10 +45,12 @@ public class Solution50_59 {
             }else {
                 while(!rightFirst.isEmpty()){
                     TreeNode node=rightFirst.pop();
-                    if(node.right!=null)
+                    if(node.right!=null) {
                         leftFirst.push(node.right);
-                    if(node.left!=null)
+                    }
+                    if(node.left!=null) {
                         leftFirst.push(node.left);
+                    }
                     integers.add(node.val);
                 }
                 leftFlag=true;
@@ -77,8 +81,9 @@ public class Solution50_59 {
                 TreeNode node=queue.poll();
                 if(node.left!=null){
                     queue.add(node.left);
-                }if(node.right!=null)
+                }if(node.right!=null) {
                     queue.add(node.right);
+                }
                 arrayList.add(node.val);
             }
             if(arrayList.size()!=0) {
@@ -428,8 +433,9 @@ public class Solution50_59 {
         visited[r][c]=true;
         if(matrix[r][c]<=threshold){
             movingCnt++;
-        }else
+        }else {
             return ;
+        }
         for(int[] n: next){
             movingCountDFS(matrix,visited,r+n[0],c+n[1],threshold);
         }
