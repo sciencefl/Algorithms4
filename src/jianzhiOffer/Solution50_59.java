@@ -240,4 +240,176 @@ public class Solution50_59 {
         }
     }
 
+    /**
+     * 删除链表中重复的节点
+     * 情况;
+     * 1. 链表为空 get
+     * 2.链表中只有一个节点 get
+     * 3.链表中有两个或多个节点 get
+     * 4.链表的头结点就重复 get
+     * 5. 链表的尾节点重复 get
+     * 6.链表的全部节点都重复 get
+     * @param pHead
+     * @return
+     */
+    public ListNode deleteDuplication(ListNode pHead)
+    {
+        if(pHead==null||pHead.next==null){
+            return pHead;
+        }
+        ListNode head= new ListNode(-1); //新建带头节点，
+        head.next=pHead;
+        ListNode preNode= head; //前置指针，也是不重复节点的指针
+        ListNode cur= pHead; // 当前节点的指针
+        ListNode next=pHead.next; // 当前节点的下一个节点
+        while(next!=null){
+            while(next!=null&&cur.val==next.val){
+                next=next.next; //如果当前节点与下一个节点的值相等，则当前节点往后延伸，直到不相等
+            }
+            //如果结尾都重复的话
+            if(next==null){
+                preNode.next=null;
+                break;
+            }
+            //如果cur的值没有重复的话，那么cur.next就会等于 next ，此时pre等移动位置
+            if(cur.next==next){
+                preNode.next=cur;
+                preNode=cur;
+                cur=next;
+                next=next.next;
+            }else{
+                preNode.next=next;
+                cur=next;
+                next=next.next;
+            }
+        }
+        return head.next;
+    }
+
+    /**
+     * 数组中的逆序对
+     * 实际上逆序对的个数就是数组排序过程中 交换位置的个数
+     * 归并排序 实现
+     * 注意要用long类型保存，否则容易丢失
+     * @param array
+     * @return
+     */
+    long count=0; // 逆序对个数
+    public int InversePairs(int [] array) {
+        if(array.length<=1){
+            return 0;
+        }
+        merge_sort(array,0,array.length-1);
+        return (int)(count%1000000007);
+    }
+    private void    merge_sort(int[] array,int low,int high){
+        //递归终止条件，也就是分解到一定规模可以直接求解
+        if(low>=high){
+            return  ;
+        }
+        int mid =low+((high-low)>>1);
+        merge_sort(array,low,mid);
+        merge_sort(array,mid+1,high);
+        merge(array,low,mid,high);
+    }
+    private void  merge(int[] array,int low,int mid,int high){
+        int i=low,j=mid+1,k=0; //k是辅助数组的游标
+        int[] tmp = new  int[high-low+1];
+        while(i<=mid&&j<=high){
+            if(array[i]<=array[j]){
+                tmp[k++]=array[i++];
+            }else{
+                tmp[k++]=array[j++];
+                count=(count+mid-i+1)%1000000007;// nums[i] > nums[j]，说明 nums[i...mid] 都大于 nums[j]
+            }
+        }
+        if(i>mid){
+            while(j<=high){
+                tmp[k++]=array[j++];
+            }
+        }else{
+            while(i<=mid){
+                tmp[k++]=array[i++];
+              //  count+=high-mid+1;
+            }
+        }
+        for(int m=0;m<k;m++){
+            array[low++]=tmp[m];
+        }
+    }
+
+    /**
+     * 矩阵中的路径
+     * 采用回溯法
+     * 通常 在二维矩阵上找路径 ，物体或者人在二维方格运动这类问题都可以用回溯方法解决。
+     * @param matrix
+     * @param rows
+     * @param cols
+     * @param str
+     * @return
+     */
+    private   int rows,cols; //数组的行列式
+    private static final int[][] next={{1,0},{-1,0},{0,-1},{0,1}};// 代表上下左右四个方向移动
+    char[] str;
+    public boolean hasPath(char[] matrix, int rows, int cols, char[] str)
+    {
+        if(rows<=0||cols<=0||matrix==null){
+            return false;
+        }
+        this.rows=rows;
+        this.cols=cols;
+        this.str=str;
+        char[][] array = buildMatrix(matrix);
+        boolean[][] marked = new boolean[rows][cols];
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                if(backTracing(array,marked,i,j,0)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private boolean backTracing(char[][] matrix,boolean[][] marked,int r,int c,int pathLen){
+        if(pathLen==str.length){
+            return true;
+        }
+        if(r>=rows||r<0||c>=cols||c<0||marked[r][c]||matrix[r][c]!=str[pathLen]){
+            return false;
+        }
+        marked[r][c]=true;
+        for(int[] n:next){
+            if(backTracing(matrix,marked,r+n[0],c+n[1],pathLen+1)){
+                return true;
+            }
+        }
+        marked[r][c]=false;
+        return false;
+
+    }
+    //将数组转化为二维数组
+    private char[][] buildMatrix(char[] array){
+        char[][] matrix= new char[rows][cols];
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                matrix[i][j]=array[i*cols+j];
+            }
+        }
+        return matrix;
+    }
+
+    /**
+     * 机器人的运动范围
+     * @param threshold
+     * @param rows
+     * @param cols
+     * @return
+     */
+    public int movingCount(int threshold, int rows, int cols)
+    {
+
+    }
+    private boolean isCanMove(int rows,int cols,int k){
+
+    }
 }
