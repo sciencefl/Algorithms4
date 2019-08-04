@@ -1,8 +1,9 @@
 package algo;
 
-import edu.princeton.cs.algs4.Queue;
 
 import java.util.LinkedList;
+import java.util.Queue;
+
 public class Graph {
 	//内部类,存储图的顶点
 	public class Vertex{
@@ -42,14 +43,14 @@ public class Graph {
 		}
 		boolean[] visited=new boolean[size];
 		visited[s]=true;
-		Queue<Integer> queue= new Queue<>();
-		queue.enqueue(s);
+		Queue<Integer> queue= new LinkedList<>();
+		queue.offer(s);
 		int[] prev=new int[size];
 		for(int i=0;i<size;i++) {
 			prev[i]=-1;
 		}
 		while(!queue.isEmpty()) {
-			int front=queue.dequeue();
+			int front=queue.poll();
 			for(int i=0;i<adj[front].size();i++) {
 				int current=adj[front].get(i);
 				if(visited[current]!=true) {
@@ -59,29 +60,48 @@ public class Graph {
 						print(prev, s, t);
 						return ;
 					}else {
-						queue.enqueue(current);
+						queue.offer(current);
 					}
 				}
 				
 			}
 		}
 	}
-	//深度优先遍历--非递归实现
+	//深度优先遍历--递归实现
+    //确定是否已经找到
+    boolean found=false;
 	public  void dfs(int s,int t) {
 		if(s==t) {
-			return ;
+		    found=true;
+			return  ;
 		}
 		//初始化
 		boolean[] visited=new boolean[size];
 		visited[s]=true;
-		//确定是否已经找到
-		boolean found=false;
-		
 		int[] prev=new int[size];
 		for(int i=1;i<size;i++) {
 			prev[i]=-1;
 		}
+		reDfs(visited,s,t,prev);
+		print(prev,s,t);
 	}
+	public  void reDfs(boolean[] visited,int s,int t,int[] prev){
+        if(found==true){
+            return ;
+        }
+        visited[s]=true;
+        if(s==t){
+            found=true;
+            return;
+        }
+        for(int i=0;i<adj[s].size();i++){
+            int current=adj[s].get(i);
+            if(!visited[current]){
+                prev[current]=s;
+                reDfs(visited,current,t,prev);
+            }
+        }
+    }
 	// 由于prev中存储的是逆序的，所以采用递归反序打印
 	public void print(int[] prev,int s,int t) {
 		if(prev[t]!=-1&&s!=t) {
