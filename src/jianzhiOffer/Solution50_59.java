@@ -405,11 +405,137 @@ public class Solution50_59 {
      * @param cols
      * @return
      */
+    private int movingCnt;
+    //private   int rows,cols; //数组的行列式
+    //private static final int[][] next={{1,0},{-1,0},{0,-1},{0,1}};// 代表上下左右四个方向移动
     public int movingCount(int threshold, int rows, int cols)
     {
-
+        if(rows<=0||cols<=0){
+            return 0;
+        }
+        this.rows=rows;
+        this.cols=cols;
+        int[][] matrix=new  int[rows][cols];
+        boolean[][] visited= new boolean[rows][cols];
+        initSum(rows,cols,matrix);
+        movingCountDFS(matrix,visited,0,0,threshold);
+        return movingCnt;
     }
-    private boolean isCanMove(int rows,int cols,int k){
-
+    private void movingCountDFS(int[][] matrix,boolean[][] visited,int r,int c,int threshold){
+        if(r<0||r>=rows||c<0||c>cols||visited[r][c]){
+            return ;
+        }
+        visited[r][c]=true;
+        if(matrix[r][c]<=threshold){
+            movingCnt++;
+        }else
+            return ;
+        for(int[] n: next){
+            movingCountDFS(matrix,visited,r+n[0],c+n[1],threshold);
+        }
     }
+
+    /**
+     * 初始化格子的值，每个格子的值表示 位数之和
+     * @param rows
+     * @param cols
+     */
+    private void initSum(int rows,int cols,int[][] matrix){
+        if(rows<0|| cols<0){
+            return ;
+        }
+        int[] sum=new int[Math.max(rows,cols)];
+        for(int i=0;i<sum.length;i++){
+            int sumrl=0;
+            int counts=i;
+            while(counts!=0){
+                sumrl+=counts%10;
+                counts=counts/10;
+            }
+            sum[i]=sumrl;
+        }
+        for(int i=0;i<rows;i++){
+            for (int i1 = 0; i1 < cols; i1++) {
+                matrix[i][i1]=sum[i]+sum[i1];
+            }
+        }
+        /**
+        this.matrix= new  int[rows][cols];
+        for(int i=0;i<rows;i++){
+            int sumRols=0;
+            int counts=i;
+            while(counts!=0){
+                sumRols+=counts%10;
+                counts=counts/10;
+            }
+            for(int j=0;j<cols;j++){
+                int sumCols=0;
+                counts=j;
+                while(counts!=0){
+                    sumCols+=counts%10;
+                    counts=counts/10;
+                }
+                matrix[i][j]=sumRols+sumCols;
+            }
+        }
+         **/
+    }
+
+    /**
+     * 正则表达式匹配
+     * 回溯算法
+     * @param str
+     * @param pattern
+     * @return
+     */
+    boolean matched=false;
+    int slen;
+    int plen;
+    public boolean match(char[] str, char[] pattern)
+    {
+        if(str.length!=0&&pattern.length==0){
+            return false;
+        }
+        this.slen=str.length;
+        this.plen=pattern.length;
+        rmatch(str,pattern,0,0);
+        return matched;
+    }
+    private void rmatch(char[] str,char[] pattern,int si,int pi){
+        if(matched){
+            return ;
+        }
+        if(pi==plen){
+            if(si==slen){
+                matched=true;
+            }else
+                matched=false;
+            return;
+        }
+        if(pi+1<plen&&pattern[pi+1]=='*'){
+            //匹配前面不出现的情况
+            rmatch(str,pattern,si,pi+2);
+            //匹配前面出现的情况
+            if(pattern[pi]=='.'){
+                int k=0;
+                while(si+k<slen){
+                    rmatch(str,pattern,si+k+1,pi+2);
+                    k++;
+                }
+            }else{
+                int k=0;
+                while(si+k<slen&&pattern[pi]==str[si+k]){
+                    rmatch(str,pattern,si+k+1,pi+2);
+                    k++;
+                }
+            }
+
+        }else if(si<slen&&pattern[pi]=='.'){
+            rmatch(str,pattern,si+1,pi+1);
+        }else if(si<slen&&pattern[pi]==str[si]){
+            rmatch(str,pattern,si+1,pi+1);
+        }else
+            matched=false;
+    }
+
 }
