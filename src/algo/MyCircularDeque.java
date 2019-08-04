@@ -48,7 +48,9 @@ public class MyCircularDeque {
     		circularDeque[tail]=value;
     		this.size++;
     		return true;
-        }else return false;
+        }else {
+			return false;
+		}
     }
     
     /** Deletes an item from the front of Deque. Return true if the operation is successful. */

@@ -1,17 +1,9 @@
 package algo;
 
-import java.awt.List;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.xml.parsers.DocumentBuilder;
-
-import org.omg.CORBA.TRANSACTION_MODE;
-
 import Foundamentals.Stack;
-import edu.princeton.cs.algs4.SET;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Solution {
 	public int climbStairs(int n) {
@@ -96,9 +88,9 @@ public class Solution {
 		return headNode;
     }
 	/*
-	 * ºÏ²¢Á½¸öÓĞĞòÁ´±í£¬ĞèÒª×¢Òâ
-	 * 1.±ß½çÎÊÌâ
-	 * 2.Â³°ôĞÔÎÊÌâ
+	 * åˆå¹¶ä¸¤ä¸ªæœ‰åºé“¾è¡¨ï¼Œéœ€è¦æ³¨æ„
+	 * 1.è¾¹ç•Œé—®é¢˜
+	 * 2.é²æ£’æ€§é—®é¢˜
 	 */
 	
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -120,7 +112,7 @@ public class Solution {
         
     }
     public ListNode removeNthFromEnd(ListNode head, int n) {
-    	//ÒıÈëÉÚ±ø»úÖÆ
+    	//å¼•å…¥å“¨å…µæœºåˆ¶
     	ListNode sentry=new ListNode(0);
     	sentry.next=head;
     	ListNode first=sentry;
@@ -148,7 +140,7 @@ public class Solution {
     	}
         return prevNode;
     }
-    //Êı×é´æ´¢·¨
+    //æ•°ç»„å­˜å‚¨æ³•
     public ListNode middleNode(ListNode head) {
     	ListNode slow;
     	ListNode fast;
@@ -181,7 +173,7 @@ public class Solution {
     	}
     	return (int)mid;
     }
-    //·´×ª×Ö·û´®ÖĞµÄËùÓĞµ¥´Ê
+    //åè½¬å­—ç¬¦ä¸²ä¸­çš„æ‰€æœ‰å•è¯
     public String reverseWords(String s) {
         if(s == null || s.length() == 0)
         	return "";
@@ -207,16 +199,16 @@ public class Solution {
         }
         return result.toString();
     }
-    //·´×ª×Ö·û´®
+    //åè½¬å­—ç¬¦ä¸²
     public void reverseString(char[] s) {
     	if(s==null||s.length==0) {
     		return ;
     	}
-    	//¸ßµÍÊı×éÏÂ±ê£¬ÓÃÓÚ×ª»»×Ö·û´®
+    	//é«˜ä½æ•°ç»„ä¸‹æ ‡ï¼Œç”¨äºè½¬æ¢å­—ç¬¦ä¸²
         int low=0;
         int high=s.length-1;
         while(low<high) {
-        	//´´½¨¸¨Öú±äÁ¿£¬ÓÃÓÚÊı¾İ½»»»
+        	//åˆ›å»ºè¾…åŠ©å˜é‡ï¼Œç”¨äºæ•°æ®äº¤æ¢
         	 char temp=s[low];
         	 s[low]=s[high];
         	 s[high]=temp;
@@ -225,22 +217,22 @@ public class Solution {
         }
     }
     /**
-     * ·´×ªµ¥´Ê
+     * åè½¬å•è¯
      * @param s
-     * Ë¼Â·£º
-     * 1.ÒªÏë·´×ªËùÓĞµ¥´Ê£¬ÔòĞèÒª°´ÕÕ·´×ª×Ö·û´®µÄË¼Ïë£¬Ö»ÊÇ°Ñµ¥Î»ÓÉ×Ö·û£¬±ä»¯Îª×Ö·û´®
-     * 2.°´ÕÕ" "¿Õ¸ñ·Ö¸î×Ö·û´®£¬´æÈë×Ö·û´®Êı×é£¬È»ºó·´×ª¡£
-     * 3.°´ÕÕ¡° ¡±¿Õ¸ñÆ´½ÓÔ­Ôò£¬Æ´½Ó£¬ ·µ»Ø¼´¿É
+     * æ€è·¯ï¼š
+     * 1.è¦æƒ³åè½¬æ‰€æœ‰å•è¯ï¼Œåˆ™éœ€è¦æŒ‰ç…§åè½¬å­—ç¬¦ä¸²çš„æ€æƒ³ï¼Œåªæ˜¯æŠŠå•ä½ç”±å­—ç¬¦ï¼Œå˜åŒ–ä¸ºå­—ç¬¦ä¸²
+     * 2.æŒ‰ç…§" "ç©ºæ ¼åˆ†å‰²å­—ç¬¦ä¸²ï¼Œå­˜å…¥å­—ç¬¦ä¸²æ•°ç»„ï¼Œç„¶ååè½¬ã€‚
+     * 3.æŒ‰ç…§â€œ â€ç©ºæ ¼æ‹¼æ¥åŸåˆ™ï¼Œæ‹¼æ¥ï¼Œ è¿”å›å³å¯
      * @return
      */
     public String reverseWord(String s) {
-    	// µÚ0²½£º±ß½çÅĞ¶Ï
+    	// ç¬¬0æ­¥ï¼šè¾¹ç•Œåˆ¤æ–­
     	if(s==null||s=="") {
     		return "";
     	}
-    	//µÚÒ»²½:·Ö¸îÕû¸ö×Ö·û´®£¬³ÉÎª×Ö·û´®Êı×é
+    	//ç¬¬ä¸€æ­¥:åˆ†å‰²æ•´ä¸ªå­—ç¬¦ä¸²ï¼Œæˆä¸ºå­—ç¬¦ä¸²æ•°ç»„
     	String[] arrayWord=s.split(" ");
-    	//µÚ¶ş²½£º·´×ªÕû¸ö×Ö·û´®
+    	//ç¬¬äºŒæ­¥ï¼šåè½¬æ•´ä¸ªå­—ç¬¦ä¸²
     	int low=0;
     	int high=arrayWord.length-1;
     	while(low<high) {
@@ -250,8 +242,8 @@ public class Solution {
     		low++;
     		high--;
     	}
-    	//µÚÈı²¿£¬¿Õ¸ñÆ´½ÓÔ­Ôò
-    	StringBuilder result=new StringBuilder();//String £¬StringBuffer,StringBuilderÇø±ğ¡£
+    	//ç¬¬ä¸‰éƒ¨ï¼Œç©ºæ ¼æ‹¼æ¥åŸåˆ™
+    	StringBuilder result=new StringBuilder();//String ï¼ŒStringBuffer,StringBuilderåŒºåˆ«ã€‚
     	for(int i=0;i<arrayWord.length;i++) {
     		arrayWord[i]=arrayWord[i].trim();
     		if(arrayWord[i].equals("")) {
@@ -259,37 +251,37 @@ public class Solution {
     		}
     		result.append(arrayWord[i]+" ");
     	}
-    	//È¥³ıÄ©Î²×îºóÒ»¸ö¿Õ¸ñ
+    	//å»é™¤æœ«å°¾æœ€åä¸€ä¸ªç©ºæ ¼
     	if(result.length()>0) {
     		result.setLength(result.length()-1);
     	}
     	return result.toString();
     }
     /**
-     * ×Ö·û´®×ª»»ÕûÊı
-     * Èç¹ûÇ°ÃæÓĞ¿Õ¸ñ£¬ĞèÒªÌŞ³ı¿Õ¸ñ£»
-     * ÌŞ³ı¿Õ¸ñºó£¬µÚÒ»¸ö×Ö·û´®Èç¹ûÊÇ+ºÅ£¬ÈÏÎªÊÇÕıÊı£»Èç¹ûÊÇ-ºÅ£¬ÈÏÎªÊÇ¸ºÊı£»
-     * ºóÃæµÄ×Ö·ûÈç¹û²»ÊÇÊı×Ö£¬ÄÇÃ´·µ»Ø0£¬Èç¹ûÊÇÊı×Ö£¬·µ»ØÊµ¼ÊµÄÊı×Ö¡£Óöµ½²»ÊÇÊı×ÖµÄ×Ö·û£¬×ª»»½áÊø¡£
+     * å­—ç¬¦ä¸²è½¬æ¢æ•´æ•°
+     * å¦‚æœå‰é¢æœ‰ç©ºæ ¼ï¼Œéœ€è¦å‰”é™¤ç©ºæ ¼ï¼›
+     * å‰”é™¤ç©ºæ ¼åï¼Œç¬¬ä¸€ä¸ªå­—ç¬¦ä¸²å¦‚æœæ˜¯+å·ï¼Œè®¤ä¸ºæ˜¯æ­£æ•°ï¼›å¦‚æœæ˜¯-å·ï¼Œè®¤ä¸ºæ˜¯è´Ÿæ•°ï¼›
+     * åé¢çš„å­—ç¬¦å¦‚æœä¸æ˜¯æ•°å­—ï¼Œé‚£ä¹ˆè¿”å›0ï¼Œå¦‚æœæ˜¯æ•°å­—ï¼Œè¿”å›å®é™…çš„æ•°å­—ã€‚é‡åˆ°ä¸æ˜¯æ•°å­—çš„å­—ç¬¦ï¼Œè½¬æ¢ç»“æŸã€‚
      * @param str
      * @return
      */
     public int myAtoi(String str) {
-    	//µÚ0²½£¬ÅĞ¶ÏÓĞĞ§ĞÔ
+    	//ç¬¬0æ­¥ï¼Œåˆ¤æ–­æœ‰æ•ˆæ€§
     	if(str==null||str=="") {
     		return 0;
     	}
-    	//µÚ1²½£¬ÌŞ³ı¿Õ¸ñ
+    	//ç¬¬1æ­¥ï¼Œå‰”é™¤ç©ºæ ¼
     	int strLength=str.length();
-    	int index=0;//×Ö·ûÓÎ±ê
-    	int sign=1;//ÅĞ¶ÏÕı¸ºµÄÊ±ºòÓÃµÄ
+    	int index=0;//å­—ç¬¦æ¸¸æ ‡
+    	int sign=1;//åˆ¤æ–­æ­£è´Ÿçš„æ—¶å€™ç”¨çš„
     	while(index<strLength&&str.charAt(index)==' ') {
     		index++;
     	}
-    	//Èç¹ûÈ«ÊÇ¿Õ¸ñµÄ»°
+    	//å¦‚æœå…¨æ˜¯ç©ºæ ¼çš„è¯
     	if(index==strLength) {
     		return 0;
     	}
-    	//µÚ2²½£¬ÅĞ¶ÏÕı¸º
+    	//ç¬¬2æ­¥ï¼Œåˆ¤æ–­æ­£è´Ÿ
     	if(str.charAt(index)=='-') {
     		sign=-1;
     		index++;
@@ -297,7 +289,7 @@ public class Solution {
     		sign=1;
     		index++;
     	}
-    	//µÚ3²½£¬ÀÛ¼ÓÔËËã
+    	//ç¬¬3æ­¥ï¼Œç´¯åŠ è¿ç®—
     	double sum=0;
     	while(index<strLength) {
     		char temp=str.charAt(index);
@@ -322,6 +314,9 @@ public class Solution {
     //	System.out.println(solution.mySqrt(2147395600));
     	solution.test("    zhangfulinag     ");
     	System.out.println(solution.myAtoi(" "));
+		System.out.println("Solution's ClassLoader is "+Solution.class.getClassLoader());
+		System.out.println("Solution's  Parent ClassLoader is "+Solution.class.getClassLoader().getParent());
+		System.out.println("Solution's   Parent  Parent ClassLoader is "+Solution.class.getClassLoader().getParent().getParent());
     }
 
 
