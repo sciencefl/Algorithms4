@@ -1,9 +1,6 @@
 package exam.bigo;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * @Classname NumStars
@@ -69,8 +66,16 @@ public class NumStars {
             }
             System.out.println(Arrays.toString(queue.toArray()));
         }
+        Integer[] a = {9, 8, 7, 2, 3, 4, 1, 0, 6, 5};
+        Arrays.sort(a,new myComparator());
        // System.out.println(Arrays.toString(queue.toArray()));
         return queue.peek();
     }
     PriorityQueue<Map.Entry<Integer,Integer>>  pr = new PriorityQueue<>((o1,o2)->o2.getValue()-o1.getValue());// 大根堆
+}
+class myComparator implements Comparator<Integer> {
+@Override
+    public int compare(Integer o1,Integer o2){
+        return o2-o1;
+        }
 }
