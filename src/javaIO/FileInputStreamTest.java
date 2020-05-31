@@ -1,16 +1,14 @@
 package javaIO;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 public class FileInputStreamTest {
-
+	// InputStream, OutStream 为抽象类
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		//先创建一个输入流  输入流数据源为 FileInputStreamTest.java
-		FileInputStream fileInputStream=null;
-		FileOutputStream fileOutputStream=null;
+		InputStream fileInputStream=null;
+		OutputStream fileOutputStream=null;
 		try {
 			fileInputStream=new FileInputStream("./src/javaIO/FileInputStreamTest.java");
 			//创建一个文件用于存储输出流
@@ -35,8 +33,5 @@ public class FileInputStreamTest {
 				fileOutputStream.close();
 			}
 		}
-
-
 	}
-
 }
