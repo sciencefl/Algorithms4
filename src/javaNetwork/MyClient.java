@@ -7,7 +7,6 @@ import java.net.Socket;
 
 public class MyClient {
     public static void main(String[] args) {
-        ServerSocket serverSocket = null;
         Socket socket = null;
         InputStream inputStream = null;
         BufferedReader reader = null;
